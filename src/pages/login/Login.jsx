@@ -1,6 +1,9 @@
 import SocialLogin from "../../components/shared/SocialLogin"
 import { Link } from 'react-router-dom';
-import  './Login.css'
+import  './Login.css';
+
+
+
 const Login = () => {
     return (
         <div className="hero my-5" id="login">

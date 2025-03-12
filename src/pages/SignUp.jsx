@@ -3,6 +3,21 @@ import { Link } from 'react-router-dom';
 import SocialLogin from '../components/shared/SocialLogin';
 
 const SignUp = () => {
+ const handleSignUp = e => {
+  e.preventDefault();
+  const form = e.target;
+   const name = form.name.value;
+   const email = form.email.value;
+   const password = form.password.value;
+   const image = form.image.files[0];
+   console.log({name, email, password, image})
+
+
+ }
+
+
+
+
     return (
         <div className="hero">
         <div className="hero-content flex-col">
@@ -10,7 +25,7 @@ const SignUp = () => {
            
           
           <div className="card w-full max-w-3xl shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form className="card-body" onSubmit={handleSignUp}>
             <h1 className="text-xl font-bold text-center">Sign up now!</h1>
             <p className="text-gray-400 text-center text-sm">
               Create your own account
@@ -19,30 +34,30 @@ const SignUp = () => {
                 <label className="label">
                   <span className="label-text">Your Name</span>
                 </label>
-                <input type="text" placeholder="Enter your name" className="input input-bordered" required />
+                <input type="text" name='name' placeholder="Enter your name" className="input input-bordered" required />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Upload your Image</span>
                 </label>
                
-                <input type="file" className="file-input file-input-bordered" />
+                <input type="file" name='image' className="file-input file-input-bordered" />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email address</span>
                 </label>
-                <input type="email" placeholder="Enter your email" className="input input-bordered" required />
+                <input type="email" name='email' placeholder="Enter your email" className="input input-bordered" required />
               </div>
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input type="password" placeholder="password" className="input input-bordered" required />
+                <input type="password" name='password' placeholder="password" className="input input-bordered" required />
                 
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary ">Sign Up</button>
+                <button type='submit' className="btn btn-primary ">Sign Up</button>
               </div>
               </form>
              <SocialLogin/>
