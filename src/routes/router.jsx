@@ -4,11 +4,13 @@ import App from '../App';
 import MainLayout from '../layouts/MainLayout';
 import Login from '../pages/login/Login';
 import SignUp from '../pages/SignUp';
+import ErrorPage from '../pages/ErrorPage';
 
 const router = createBrowserRouter([
     {
       path: "/",
       element: <MainLayout/>,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/login",

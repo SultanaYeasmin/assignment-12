@@ -48,14 +48,8 @@ const AuthProvider = ({ children }) => {
     }
 
     const signOutUser = () => {
-
         setLoading(true);
         return signOut(auth)
-        // .then(() => {
-        //     // Sign-out successful.
-        //   }).catch((error) => {
-        //     // An error happened.
-        //   });
     }
 
     const updateUserProfile = (name, photo) => {
@@ -63,13 +57,6 @@ const AuthProvider = ({ children }) => {
             displayName: name,
             photoURL: photo
         })
-        //   .then(() => {
-        //     // Profile updated!
-        //     to
-        //   }).catch((error) => {
-        //     // An error occurred
-        //     // ...
-        //   });
     }
 
 

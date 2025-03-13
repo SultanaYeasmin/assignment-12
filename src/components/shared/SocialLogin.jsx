@@ -1,13 +1,14 @@
 import React from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const SocialLogin = () => {
     const {
         createUser, signIn, signInWithGoogle, updateUserProfile,
         signOutUser, loading, user, setUser, setLoading,
     } = useAuth();
-
+    const navigate = useNavigate();
     const handleGoogleSignIn = ()=> {
         signInWithGoogle()
          .then((result) => {
@@ -18,6 +19,7 @@ const SocialLogin = () => {
                   const user = result.user;
                   // IdP data available using getAdditionalUserInfo(result)
                   // ...
+                  navigate('/')
                   toast.success("Your google account is signed in successfully!")
                 }).catch((error) => {
                   // Handle Errors here.
