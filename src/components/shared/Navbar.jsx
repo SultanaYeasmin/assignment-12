@@ -3,11 +3,15 @@ import logo from '../../assets/logo.png'
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { FaSignOutAlt } from 'react-icons/fa';
+import LoadingSpinner from './LoadingSpinner';
 
 const Navbar = () => {
-    const { user, signOutUser } = useAuth();
-    console.log(user);
+    const { user, signOutUser, loading } = useAuth();
     const navigate = useNavigate();
+    console.log(user);
+   
+    
+    if (loading) return <LoadingSpinner/>
     const handleLogOut = () => {
         signOutUser()
             .then(() => {

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SocialLogin from '../components/shared/SocialLogin';
-import { imageUpload } from '../api/utils';
-import useAuth from "../hooks/useAuth"
+import SocialLogin from '../../components/shared/SocialLogin';
+import { imageUpload, saveUserData } from '../../api/utils';
+import useAuth from "../../hooks/useAuth"
 import toast from 'react-hot-toast';
 const SignUp = () => {
   const {
     createUser, signIn, signInWithGoogle, updateUserProfile,
     signOutUser, loading, user, setUser, setLoading,
-} = useAuth();
-const navigate = useNavigate();
+  } = useAuth();
+  const navigate = useNavigate();
 
   const handleSignUp = async event => {
     event.preventDefault()
@@ -18,34 +18,33 @@ const navigate = useNavigate();
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
-    const photoUrl = await imageUpload(image)
-    console.log({ name, email, password, image, photoUrl })
-     createUser  (email, password)  
-            .then((userCredential) => {
-                // Signed up 
-                const user = userCredential.user;
-                // ...
-                updateUserProfile(name, photoUrl)
-                .then(() => {
-                      // Profile updated!
-                      console.log(user);
-                      navigate('/')
-                      toast.success("sign-up successfully done!")
-                    }).catch((error) => {
-                      toast.error(error.message)
-                    });
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-               console.log(error)
-               toast.error(errorMessage)
-            });
-        }
-  
+    const photoUrl = await imageUpload(image);
+    const role = form.role.value;
 
-
-
+    console.log({ name, email, password, image, photoUrl,role })
+    createUser(email, password)
+      .then((userCredential) => {
+        // Signed up 
+        const user = userCredential.user;
+        // ...
+        updateUserProfile(name, photoUrl)
+          .then(() => {
+            // Profile updated!
+            console.log(user);
+             saveUserData(user, role)
+            navigate('/')
+            toast.success("sign-up successfully done!")
+          }).catch((error) => {
+            toast.error(error.message)
+          });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(error)
+        toast.error(errorMessage)
+      });
+  }
 
   return (
     <div className="hero">
@@ -68,20 +67,32 @@ const navigate = useNavigate();
               </label>
               <input type="file" name='image' className="file-input file-input-bordered" />
             </div>
-            
+
+            <label className="form-control w-full max-w-xs">
+              <div className="label">
+                <span className="label-text">Select your role</span>
+
+              </div>
+              <select name='role' className="select select-bordered">
+                <option defaultValue="User">Pick one</option>
+                <option>User</option>
+                <option>DeliveryMen</option>
+              </select>
+            </label>
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email address</span>
               </label>
-              <input type="email" name='email' placeholder="Enter your email" 
-              className="input input-bordered" required />
+              <input type="email" name='email' placeholder="Enter your email"
+                className="input input-bordered" required />
             </div>
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
-              <input type="password" name='password' placeholder="password" 
-              className="input input-bordered" required />
+              <input type="password" name='password' placeholder="password"
+                className="input input-bordered" required />
 
             </div>
             <div className="form-control mt-6">

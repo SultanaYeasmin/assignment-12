@@ -1,8 +1,5 @@
 import axios from "axios";
 
-
-
-
 export const imageUpload =async imageData =>{
     const formData = new FormData();
     formData.append('image', imageData)
@@ -14,10 +11,15 @@ export const imageUpload =async imageData =>{
     return data.data.display_url;
 }
 
+export const saveUserData = async (user, role)=>{
+    await axios.post(`${import.meta.env.VITE_API_URL}/users/${user?.email}`,{
+    name: user?.displayName,
+    image: user?.photoURL,
+    email: user?.email,
+    role: role || "User",
+})
+}
 
 
 
 
-
-
-// curl --location --request POST "https://api.imgbb.com/1/upload?expiration=600&key=YOUR_CLIENT_API_KEY" --form "image=R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
