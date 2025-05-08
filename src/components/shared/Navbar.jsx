@@ -3,7 +3,7 @@ import logo from '../../assets/logo.png'
 import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { FaSignOutAlt } from 'react-icons/fa';
-import LoadingSpinner from './LoadingSpinner';
+import LoadingSpinner from '../../components/Shared/LoadingSpinner';
 
 const Navbar = () => {
     const { user, signOutUser, loading } = useAuth();

@@ -1,11 +1,19 @@
-import Navbar from '../components/shared/Navbar';
-import Footer from '../components/shared/Footer';
+import Navbar from '../components/Shared/Navbar';
+import Footer from '../components/Shared/Footer';
+import Sidebar from '../components/Dashboard/Sidebar/Sidebar';
+import { Outlet } from 'react-router-dom';
 
 
 const DashboardLayout = () => {
     return (
-        <div>
-           DashboardLayout
+        <div className='flex'>
+            <div>
+                <Sidebar className="w-1/3"></Sidebar>
+            </div>
+            <div className='flex-1'>
+                <Outlet />
+            </div>
+
         </div>
     );
 };

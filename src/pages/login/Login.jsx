@@ -1,4 +1,4 @@
-import SocialLogin from "../../components/shared/SocialLogin"
+import SocialLogin from "../../components/Shared/SocialLogin"
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import useAuth from "../../hooks/useAuth";

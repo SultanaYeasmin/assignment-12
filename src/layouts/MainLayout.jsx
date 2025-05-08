@@ -1,6 +1,6 @@
 import React from 'react';
-import Navbar from '../components/shared/Navbar';
-import Footer from '../components/shared/Footer';
+import Navbar from '../components/Shared/Navbar';
+import Footer from '../components/Shared/Footer';
 
 const MainLayout = () => {
     return (

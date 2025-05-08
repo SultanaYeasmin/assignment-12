@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SocialLogin from '../../components/shared/SocialLogin';
+import SocialLogin from "../../components/Shared/SocialLogin"
 import { imageUpload, saveUserData } from '../../api/utils';
 import useAuth from "../../hooks/useAuth"
 import toast from 'react-hot-toast';
@@ -76,7 +76,7 @@ const SignUp = () => {
               <select name='role' className="select select-bordered">
                 <option defaultValue="User">Pick one</option>
                 <option>User</option>
-                <option>DeliveryMen</option>
+                <option>Delivery Man</option>
               </select>
             </label>
 
