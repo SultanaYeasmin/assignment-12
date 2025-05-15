@@ -1,26 +1,113 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../hooks/useAuth';
+import toast from 'react-hot-toast';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const BookParcel = () => {
     const { user } = useAuth();
+    const [weight, setWeight] = useState(null);
+    const [price, setPrice] = useState(null);
+
+    const axiosSecure = useAxiosSecure();
+    const navigate = useNavigate();
+
+    console.log(weight)
+
     const user_name = user?.displayName;
     const user_email = user?.email;
 
+    const handleWeight = w => {
+        if (isNaN(w)|| !w || w <= 0) {
+            setWeight(null);
+            setPrice(null);
+            return toast.error("Please enter weight of parcel!")
+        }
+        setWeight(w)
+        if (w > 0 && w < 2) {
+            setPrice(50)
+
+        }
+        else if (w == 2) {
+            setPrice(100)
+
+        }
+        else if (w > 2) {
+            setPrice(150)
+
+        }
+        else {
+            setPrice(null)
+        }
+
+
+
+    }
+
+
+
     const handleBooking = async e => {
         e.preventDefault();
+
         const form = e.target;
         const phoneNumber = form.phoneNumber.value
         const parcelType = form.parcelType.value
         const parcelWeight = form.parcelWeight.value
-        const user_image = user?.photoURL;
-        const query_date = new Date().toLocaleString()
+        const receiverName = form.receiverName.value
+        const receiverPhoneNumber = form.receiverPhoneNumber.value
+        const address = form.address.value
+        const requestedDeliveryDate = form.deliveryDate.value
+        const latitude = form.latitude.value
+        const longitude = form.longitude.value
+        const  bookingDate = new Date();
+       
+
+        const newBooking = {
+            name: user_name, email: user_email,
+            phone_number: phoneNumber, parcel_type: parcelType,
+            parcel_weight: parcelWeight,
+            price,
+            receiver_name: receiverName,
+            receiver_phone_number: receiverPhoneNumber,
+            address, requested_delivery_date: requestedDeliveryDate,
+            latitude, longitude,
+            status: 'Pending',
+            booking_date:bookingDate
+        }
+        console.log(newBooking);
+        axiosSecure.post('/book-a-parcel', newBooking)
+            .then(res => {
+                console.log(res.data)
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Your booking has been added",
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    navigate('/dashboard/my-Parcels');
+                    form.reset();
+
+                }
+
+
+
+            }
+
+
+
+            )
+
+
     }
 
     return (
         <div className='text-gray-950 p-4'>
             <Helmet>
-                <title>Booking parcels | Dashboard</title>
+                <title>Booking | Dashboard</title>
             </Helmet>
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col">
@@ -31,11 +118,11 @@ const BookParcel = () => {
                         </p>
                     </div>
                     {/* <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl"> */}
-                    <div className="card w-full max-w-2xl">
+                    <div className="card w-full max-w-5xl">
                         <form onSubmit={handleBooking} className="card-body">
                             {/* name & mail */}
-                            <div className='md:flex justify-between gap-4'>
-                                <div className='md:w-1/2'>
+                            <div className='md:flex flex-col justify-between gap-4'>
+                                <div className=''>
                                     <label className="form-control">
                                         <div className="label">
                                             <span className="label-text">Your name</span>
@@ -46,14 +133,14 @@ const BookParcel = () => {
                                             type="text" placeholder="Your name" className="input input-bordered w-full max-w-lg" readOnly />
                                     </label>
                                 </div>
-                                <div className='md:w-1/2'>
+                                <div className=''>
                                     <label className="form-control">
                                         <div className="label">
                                             <span className="label-text">Your Email</span>
                                         </div>
                                         <input
-                                         defaultValue={user_email}
-                                            name="email" type="email" placeholder="email" className="input input-bordered w-full max-w-lg" readOnly  />
+                                            defaultValue={user_email}
+                                            name="email" type="email" placeholder="email" className="input input-bordered w-full max-w-lg" readOnly />
                                     </label>
                                 </div>
                             </div>
@@ -65,7 +152,7 @@ const BookParcel = () => {
                                 </label>
                                 <input
                                     name="phoneNumber"
-                                    type="text" placeholder="Phone Number" className="input input-bordered" required />
+                                    type="tel" placeholder="Phone Number" className="input input-bordered" required />
                             </div>
 
                             {/* parcel type and weight */}
@@ -77,18 +164,22 @@ const BookParcel = () => {
                                         </div>
                                         <input name="parcelType"
                                             type="text"
-                                            placeholder="Parcel Type" className="input input-bordered w-full max-w-lg" />
+                                            placeholder="Parcel Type" className="input input-bordered w-full max-w-lg" required />
                                     </label>
                                 </div>
                                 <div className='md:w-1/2'>
                                     <label className="form-control">
                                         <div className="label">
-                                            <span className="label-text">Parcel Weight</span>
+                                            <span className="label-text">Parcel Weight (Kg)</span>
                                         </div>
                                         <input
+                                            value={weight}
+                                            onChange={e => handleWeight(parseFloat(e.target.value))}
                                             name="parcelWeight"
-                                            type="text"
-                                            placeholder="Parcel Weight" className="input input-bordered w-full max-w-lg" required />
+                                            type="number"
+                                            step="any"
+                                            placeholder="Parcel Weight"
+                                            className="input input-bordered w-full max-w-lg" required />
                                     </label>
                                 </div>
                             </div>
@@ -101,7 +192,7 @@ const BookParcel = () => {
                                         </div>
                                         <input name="receiverName"
                                             type="text"
-                                            placeholder="Receiver's Name" className="input input-bordered w-full max-w-lg" />
+                                            placeholder="Receiver's Name" className="input input-bordered w-full max-w-lg" required />
                                     </label>
                                 </div>
                                 <div className='md:w-1/2'>
@@ -124,7 +215,7 @@ const BookParcel = () => {
                                         </div>
                                         <textarea
                                             name="address"
-                                            className="textarea textarea-bordered h-24" placeholder="Delivery Address"></textarea>
+                                            className="textarea textarea-bordered h-24" placeholder="Delivery Address" required></textarea>
 
                                     </label>
                                 </div>
@@ -137,20 +228,23 @@ const BookParcel = () => {
                                     <span className="label-text">Requested Delivery Date</span>
                                 </label>
                                 <input
-                                    name="deliveryDate" type="date" placeholder="Requested Delivery Date" className="input input-bordered" required />
+                                    name="deliveryDate"
+                                    type="date" placeholder="Requested Delivery Date" className="input input-bordered" required />
                             </div>
-
-
 
                             {/*	Delivery Address Latitude (i.e 21.121365496) &	Delivery Address longitude (i.e 21.121365496) */}
                             <div className='md:flex  justify-between gap-4'>
                                 <div className='md:w-1/2'>
                                     <label className="form-control">
                                         <div className="label">
-                                            <span className="label-text">Delivery Address Latitude</span>
+                                            <span className="label-text">
+
+
+                                                Delivery Address Latitude</span>
                                         </div>
                                         <input
-                                            name="latitude" type="text" placeholder="Latitude" className="input input-bordered w-full max-w-lg" />
+                                            name="latitude" step="any"
+                                            type="number" placeholder="Latitude" className="input input-bordered w-full max-w-lg" required />
                                     </label>
                                 </div>
                                 <div className='md:w-1/2'>
@@ -159,7 +253,9 @@ const BookParcel = () => {
                                             <span className="label-text">Delivery Address Longitude</span>
                                         </div>
                                         <input
-                                            name="longitude" type="text" placeholder="Longitude" className="input input-bordered w-full max-w-lg" required />
+                                            name="longitude"
+                                            step="any"
+                                            type="number" placeholder="Longitude" className="input input-bordered w-full max-w-lg" required />
                                     </label>
                                 </div>
                             </div>
@@ -168,14 +264,16 @@ const BookParcel = () => {
                             {/* Price */}
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Price: Tk. {50}</span>
+                                    {weight ? <span className="label-text">Price: Tk. {price}</span>
+
+                                        : <span className="label-text">Price:  <span className='font-bold text-red-500 text-lg'>Please enter valid weight!</span> </span>}
                                 </label>
 
                             </div>
 
                             {/* ●	Parcel Delivery Address */}
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary">Book your parcel</button>
+                                <button className="btn btn-primary" disabled={!price}>Book your parcel</button>
                             </div>
 
                         </form>

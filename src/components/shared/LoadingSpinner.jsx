@@ -1,13 +1,15 @@
 import React from 'react';
-import { BarLoader
+import {
+    PuffLoader
 } from 'react-spinners';
 
 const LoadingSpinner = () => {
     return (
         <div className='flex justify-center items-center h-[500px]'>
-            <BarLoader
+            <PuffLoader
 
-                color="#6068e5"     width={200}
+                color="#136717"
+                size={100}
 
             />
         </div>
