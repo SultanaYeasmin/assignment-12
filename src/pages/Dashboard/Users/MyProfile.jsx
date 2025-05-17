@@ -14,9 +14,11 @@ const MyProfile = () => {
     const axiosSecure = useAxiosSecure();
     const [photo, setPhoto] = useState(user?.photoURL)
     const handleUpdateProfile = async (event) => {
-        event.preventDefault()
+        event.preventDefault();
+        
         const image = event.target.image.files[0];
         const photoUrl = await imageUpload(image);
+
         if (!image) {
             toast.error("Please upload an image!");
             return;

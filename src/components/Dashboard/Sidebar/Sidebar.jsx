@@ -7,7 +7,7 @@ import UserMenu from "./Menu/UserMenu";
 
 const Sidebar = () => {
     const [role, isLoading ] = useRole();
-    if (isLoading) return <LoadingSpinner />
+    // if (isLoading) return <LoadingSpinner />
     return (
         <div className="w-64 min-h-screen bg-red-200">
             {/* sidebar items */}

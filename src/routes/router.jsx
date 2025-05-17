@@ -70,7 +70,8 @@ const router = createBrowserRouter([
         //admin routes
         {
           path: 'all-parcels',
-          element:<PrivateRoute> <AdminRoute><AllParcels/></AdminRoute></PrivateRoute> ,
+          element:<AllParcels/> ,
+          // element:<PrivateRoute> <AdminRoute><AllParcels/></AdminRoute></PrivateRoute> ,
         },
         {
           path:'all-users' ,
