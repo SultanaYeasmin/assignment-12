@@ -5,23 +5,26 @@ import { imageUpload, saveUserData } from '../../api/utils';
 import useAuth from "../../hooks/useAuth"
 import toast from 'react-hot-toast';
 const SignUp = () => {
+
   const {
     createUser, signIn, signInWithGoogle, updateUserProfile,
-    signOutUser, loading, user, setUser, setLoading,
+    signOutUser, loading, user, setUser, setLoading, 
   } = useAuth();
+
   const navigate = useNavigate();
 
   const handleSignUp = async event => {
     event.preventDefault()
     const form = event.target;
     const name = form.name.value;
+    const phone = form.phone.value;
     const email = form.email.value;
     const password = form.password.value;
     const image = form.image.files[0];
     const photoUrl = await imageUpload(image);
     const role = form.role.value;
 
-    console.log({ name, email, password, image, photoUrl,role })
+    console.log({ name, email, password, image, photoUrl,role, phone })
     createUser(email, password)
       .then((userCredential) => {
         // Signed up 
@@ -31,7 +34,7 @@ const SignUp = () => {
           .then(() => {
             // Profile updated!
             console.log(user);
-             saveUserData(user, role)
+             saveUserData(user, role, phone)
             navigate('/')
             toast.success("sign-up successfully done!")
           }).catch((error) => {
@@ -60,6 +63,14 @@ const SignUp = () => {
                 <span className="label-text">Your Name</span>
               </label>
               <input type="text" name='name' placeholder="Enter your name" className="input input-bordered" required />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Your Phone Number</span>
+              </label>
+              <input type="tel" name='phone' 
+              placeholder="Enter your Phone Number" 
+              className="input input-bordered" required />
             </div>
             <div className="form-control">
               <label className="label">

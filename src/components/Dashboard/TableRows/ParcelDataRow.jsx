@@ -1,4 +1,5 @@
 import React from 'react';
+import ManageParcelsModal from '../../Modal/ManageParcelModal';
 
 const ParcelDataRow = ({ parcel, index
 }) => {
@@ -18,7 +19,11 @@ const ParcelDataRow = ({ parcel, index
                 <td>{requested_delivery_date}</td>
                 <td>{price}</td>
                 <td>{status}</td>
-                <td><button type="button" className='btn btn-xs'>Manage</button></td>
+                <td><button 
+                type="button" 
+                className=''>
+                    <ManageParcelsModal/>
+                    </button></td>
 
             </tr>
         </>
