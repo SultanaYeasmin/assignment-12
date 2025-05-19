@@ -22,7 +22,7 @@ const BookParcel = () => {
     const user_email = user?.email;
 
     const handleWeight = w => {
-        if (isNaN(w)|| !w || w <= 0) {
+        if (isNaN(w) || !w || w <= 0) {
             setWeight(null);
             setPrice(null);
             return toast.error("Please enter weight of parcel!")
@@ -63,8 +63,8 @@ const BookParcel = () => {
         const requestedDeliveryDate = form.deliveryDate.value
         const latitude = form.latitude.value
         const longitude = form.longitude.value
-        const  bookingDate = new Date();
-       
+        const bookingDate = new Date();
+
 
         const newBooking = {
             name: user_name, email: user_email,
@@ -76,7 +76,7 @@ const BookParcel = () => {
             address, requested_delivery_date: requestedDeliveryDate,
             latitude, longitude,
             status: 'Pending',
-            booking_date:bookingDate
+            booking_date: bookingDate
         }
         console.log(newBooking);
         axiosSecure.post('/book-a-parcel', newBooking)
@@ -92,18 +92,8 @@ const BookParcel = () => {
                     })
                     navigate('/dashboard/my-Parcels');
                     form.reset();
-
                 }
-
-
-
-            }
-
-
-
-            )
-
-
+            })
     }
 
     return (

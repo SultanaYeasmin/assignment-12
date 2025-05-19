@@ -10,7 +10,8 @@ const AllParcels = () => {
     const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { data: parcels = [], isLoading, refetch } = useQuery({
+    const { data: parcels = [], isLoading, 
+        refetch } = useQuery({
         queryKey: ['parcels'],
         queryFn: async () => {
             const { data } = await axiosSecure.get('/all-parcels');
