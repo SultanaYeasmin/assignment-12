@@ -1,11 +1,11 @@
-import React from 'react';
+
 import ManageParcelsModal from '../../Modal/ManageParcelModal';
 
-const ParcelDataRow = ({ parcel, index
+const ParcelDataRow = ({ parcel, index, refetch
 }) => {
     const { name,
         phone_number,
-        price,
+        price,_id,
         requested_delivery_date,
         status,
         booking_date } = parcel || {}
@@ -22,7 +22,7 @@ const ParcelDataRow = ({ parcel, index
                 <td><button 
                 type="button" 
                 className=''>
-                    <ManageParcelsModal/>
+                    <ManageParcelsModal refetch={refetch} id={_id}/>
                     </button></td>
 
             </tr>

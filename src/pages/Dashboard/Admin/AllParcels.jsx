@@ -1,14 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 import ParcelDataRow from '../../../components/Dashboard/TableRows/ParcelDataRow';
+import Search from '../../../components/Dashboard/Search/Search';
+import { useState } from 'react';
+
 
 const AllParcels = () => {
     const { user, loading } = useAuth();
     const axiosSecure = useAxiosSecure();
+    const [parcelsDateRange, setParcelsDateRange] = useState(null)
 
     const { data: parcels = [], isLoading, 
         refetch } = useQuery({
@@ -19,6 +22,9 @@ const AllParcels = () => {
         }
     }
     )
+    
+    
+    
     console.log(parcels)
     if (isLoading) return <LoadingSpinner />
 
@@ -31,7 +37,14 @@ const AllParcels = () => {
             <div className='text-center my-10 text-blue-600'>
                 All Parcels
             </div>
+
+            <Search 
+            parcels={parcels}
+            parcelsDateRange={parcelsDateRange} 
+            setParcelsDateRange={setParcelsDateRange} 
+            />
             <div className="overflow-x-auto p-5">
+                
                 <table className="table table-xs">
                     <thead>
                         <tr>
@@ -48,11 +61,18 @@ const AllParcels = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {parcels &&
-
-                            parcels.map((parcel, index) => (
+                        {parcelsDateRange && parcelsDateRange.length ? parcelsDateRange.map((parcel, index) => (
                                 <ParcelDataRow
+                                    refetch={refetch}
+                                    index={index}
+                                    key={parcel._id}
+                                    parcel={parcel}
+                                />)
 
+                            ) :
+                            parcels?.map((parcel, index) => (
+                                <ParcelDataRow
+                                    refetch={refetch}
                                     index={index}
                                     key={parcel._id}
                                     parcel={parcel}
@@ -63,6 +83,8 @@ const AllParcels = () => {
                     </tbody>
                 </table>
             </div>
+       
+       
         </div>
     );
 };

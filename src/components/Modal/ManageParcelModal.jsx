@@ -9,19 +9,11 @@ import Swal from 'sweetalert2'
 import { useQuery } from '@tanstack/react-query'
 import LoadingSpinner from '../Shared/LoadingSpinner'
 
-// const people = [
-//   { id: 1, name: 'Tom Cook' },
-//   { id: 2, name: 'Wade Cooper' },
-//   { id: 3, name: 'Tanya Fox' },
-//   { id: 4, name: 'Arlene Mccoy' },
-//   { id: 5, name: 'Devon Webb' },
-// ]
 
-
-const ManageParcelModal = () => {
+const ManageParcelModal = ({ id, refetch }) => {
   let [isOpen, setIsOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const { data: deliveryMen = [], isLoading, error, refetch } = useQuery({
+  const { data: deliveryMen = [], isLoading, error} = useQuery({
     queryKey: ['deliveryMen'],
     queryFn: async () => {
       const { data } = await axiosSecure.get('/delivery-men')
@@ -29,7 +21,7 @@ const ManageParcelModal = () => {
     }
 
   })
-  const [selected, setSelected] = useState("Select a delivery man");
+  const [selected, setSelected] = useState(null);
 
   function open() {
     setIsOpen(true)
@@ -51,9 +43,27 @@ const ManageParcelModal = () => {
     const form = e.target;
     const expected_delivery_date = form.expectedDeliveryDate.value;
     const delivery_man = selected._id;
-    console.log({ expected_delivery_date, delivery_man });
+    console.log("admin assignment",{ expected_delivery_date, delivery_man });
+   
+    if (!selected._id) {
+      Swal.fire({
+        icon: 'warning',
+        text: 'Please select a delivery man.'
+      });
+      return;
+    }
+    const today = new Date();
+    const date= new Date(expected_delivery_date);
 
-    axiosSecure.patch('/book-a-parcel', {
+    if (date - today <1){
+      Swal.fire({
+        icon: 'warning',
+        text: 'Oops!!! Delivery will require at least 1 day!'
+      });
+      return;
+    }
+
+    axiosSecure.patch(`/book-a-parcel/${id}`, {
       status: 'On The Way',
       delivery_man_ID: selected?._id,
       expected_delivery_date
@@ -61,16 +71,19 @@ const ManageParcelModal = () => {
       .then(res => {
         console.log(res.data)
         if (res.data.modifiedCount > 0) {
+           refetch();
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Your booking has been added",
+            title: "User's booking has been updated",
             showConfirmButton: false,
             timer: 1500
           })
-          refetch();
+         
           // navigate('/dashboard/my-Parcels');
           form.reset();
+          close();
+          setSelected(null);
         }
       })
   }
@@ -120,10 +133,10 @@ const ManageParcelModal = () => {
                 as={Fragment}>
                 <DialogPanel
 
-                  className="w-full max-w-md rounded-xl h-[600px] bg-white p-6 backdrop-blur-2xl duration-300 ease-out shadow-lg "
+                  className="w-full max-w-md rounded-xl h-[400px] bg-white p-6 backdrop-blur-2xl duration-300 ease-out shadow-lg "
                 >
                   <DialogTitle
-                    as="h3" className="text-base/7 font-medium text-center">
+                    as="h3" className="text-2xl/8 text-green-700 font-medium text-center uppercase">
                     Update
                   </DialogTitle>
 
@@ -131,7 +144,7 @@ const ManageParcelModal = () => {
                   <div className='mt-4 w-full z-30 relative'>
                     <form onSubmit={handleManage} className="card-body">
                       <Field>
-                        <Label className="pl-2 text-green-700">Assign a delivery man:</Label>
+                        <Label className="pl-2">Assign a delivery man:</Label>
 
                         <Listbox name="assignee" value={selected} onChange={setSelected}>
                           <ListboxButton
@@ -178,7 +191,7 @@ const ManageParcelModal = () => {
 
                         <div className="form-control">
                           <label className="label">
-                            <span className="label-text">Expected Delivery Date</span>
+                            <span className="label-text">Expected Delivery Date:</span>
                           </label>
                           <input
                             name="expectedDeliveryDate"
@@ -197,8 +210,8 @@ const ManageParcelModal = () => {
                         >Assign</Button>
 
                         <Button
-                          className="inline-flex items-center gap-2 rounded-md bg-red-200 px-3 py-1.5 text-sm/6 font-semibold text-red-800 shadow-inner shadow-white/10  w-full justify-center    focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
-                          onClick={() => setIsOpen(false)}>Cancel</Button>
+                          className="inline-flex items-center gap-2 rounded-md bg-gray-300 px-3 py-1.5 text-sm/6 font-semibold text-gray-800 shadow-inner shadow-white/10  w-full justify-center    focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
+                          onClick={() => setIsOpen(false)}>Close</Button>
                       </div>
 
                     </form>
