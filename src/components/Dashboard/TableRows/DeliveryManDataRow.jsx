@@ -1,18 +1,18 @@
 import React from 'react';
 
-const DeliveryManDataRow = () => {
+const DeliveryManDataRow = ({ index, person }) => {
+console.log(person)
+    const {name, email, password, image, photoUrl,role, phone} = person || {}
     return (
-       <tr>
-                <th>{index + 1}</th>
-                <td>{name}</td>
-                <td>{phone_number}</td>
-                <td>{booking_date}</td>
-                <td>{requested_delivery_date}</td>
-                <td>{price}</td>
-                <td>{status}</td>
-                <td><button type="button" className='btn btn-xs'>Manage</button></td>
+        <tr>
+            <th>{index + 1}</th>
+            <td>{name}</td>
+            <td>{phone}</td>
+            <td>ll</td>
+            <td>9</td>
+            
 
-            </tr>
+        </tr>
     );
 };
 

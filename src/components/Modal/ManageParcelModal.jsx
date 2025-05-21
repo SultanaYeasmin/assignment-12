@@ -8,19 +8,13 @@ import useAxiosSecure from '../../hooks/useAxiosSecure'
 import Swal from 'sweetalert2'
 import { useQuery } from '@tanstack/react-query'
 import LoadingSpinner from '../Shared/LoadingSpinner'
+import useAllDeliveryMen from '../../hooks/useAllDeliveryMen'
 
 
 const ManageParcelModal = ({ id, refetch }) => {
   let [isOpen, setIsOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
-  const { data: deliveryMen = [], isLoading, error} = useQuery({
-    queryKey: ['deliveryMen'],
-    queryFn: async () => {
-      const { data } = await axiosSecure.get('/delivery-men')
-      return data
-    }
-
-  })
+ const {deliveryMen, isLoading, error} = useAllDeliveryMen();
   const [selected, setSelected] = useState(null);
 
   function open() {

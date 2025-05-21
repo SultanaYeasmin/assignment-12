@@ -22,9 +22,7 @@ const AllParcels = () => {
         }
     }
     )
-    
-    
-    
+       
     console.log(parcels)
     if (isLoading) return <LoadingSpinner />
 

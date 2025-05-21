@@ -79,7 +79,8 @@ const router = createBrowserRouter([
         },
         {
           path: 'all-delivery-men',
-          element:<PrivateRoute> <AdminRoute><AllDeliveryMen/></AdminRoute></PrivateRoute> ,
+          // element:<PrivateRoute> <AdminRoute><AllDeliveryMen/></AdminRoute></PrivateRoute> ,
+          element: <AllDeliveryMen/> ,
         },
         {
           path:'statistics' ,
