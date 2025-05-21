@@ -59,11 +59,13 @@ const router = createBrowserRouter([
         //delivery-man-routes
         {
           path: 'my-delivery-list',
-          element: <PrivateRoute><DeliveryMenRoute><MyDeliveryList/></DeliveryMenRoute></PrivateRoute>,
+          // element: <PrivateRoute><DeliveryMenRoute><MyDeliveryList/></DeliveryMenRoute></PrivateRoute>,
+          element: <MyDeliveryList/>,
         },
         {
           path: 'my-reviews',
-          element:<PrivateRoute><DeliveryMenRoute><MyReviews/></DeliveryMenRoute></PrivateRoute> ,
+          // element:<PrivateRoute><DeliveryMenRoute><MyReviews/></DeliveryMenRoute></PrivateRoute> ,
+          element:<MyReviews/>,
         },
         
 
@@ -75,7 +77,8 @@ const router = createBrowserRouter([
         },
         {
           path:'all-users' ,
-          element:<PrivateRoute> <AdminRoute><AllUsers/></AdminRoute></PrivateRoute> ,
+          // element:<PrivateRoute> <AdminRoute><AllUsers/></AdminRoute></PrivateRoute> ,
+          element:<AllUsers/>,
         },
         {
           path: 'all-delivery-men',
