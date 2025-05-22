@@ -11,7 +11,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner'
 import useAllDeliveryMen from '../../hooks/useAllDeliveryMen'
 
 
-const ManageParcelModal = ({ id, refetch }) => {
+const ReviewModal = ({ id, refetch }) => {
   let [isOpen, setIsOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
  const {deliveryMen, isLoading, error} = useAllDeliveryMen();
@@ -189,7 +189,7 @@ const ManageParcelModal = ({ id, refetch }) => {
                           </label>
                           <input
                             name="expectedDeliveryDate"
-                            type="date" placeholder="Expected Delivery Date" className="input input-bordered" required />
+                            type="date" placeholder="Requested Delivery Date" className="input input-bordered" required />
                         </div>
 
                       </div>
@@ -221,4 +221,4 @@ const ManageParcelModal = ({ id, refetch }) => {
     </>
   )
 }
-export default ManageParcelModal;
+export default ReviewModal;

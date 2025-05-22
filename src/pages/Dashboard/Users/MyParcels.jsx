@@ -6,13 +6,14 @@ import {
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 import { Helmet } from 'react-helmet-async';
 import ErrorPage from '../../ErrorPage/ErrorPage';
+import MyParcelDataRow from '../../../components/Dashboard/TableRows/MyParcelDataRow';
 
 
 const MyParcels = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
-    const { isLoading, error, data: myParcels = [] } = useQuery({
+    const { isLoading, error, data: myParcels = [], refetch } = useQuery({
         queryKey: ['myParcels', user?.email],
         queryFn: async() => {
             const { data } = await axiosSecure(`/my-parcels/${user?.email}`);
@@ -36,7 +37,7 @@ const MyParcels = () => {
                 <table className="table table-xs">
                     <thead>
                         <tr>
-                            <th></th>
+                            <th>SL#</th>
                             <th>Parcel Type</th>
                             <th>Booking Date</th>
                             <th>Requested Delivery Date</th>
@@ -49,15 +50,19 @@ const MyParcels = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Littel, Schaden and Vandervort</td>
-                            <td>Canada</td>
-                            <td>12/16/2020</td>
-                            <td>Blue</td>
-                        </tr>
+                        
+                          {
+                          myParcels &&
+                          myParcels?.map((parcel, index) => (
+                                <MyParcelDataRow
+                                    refetch={refetch}
+                                    index={index}
+                                    key={parcel._id}
+                                    parcel={parcel}
+                                />)
+
+                            )}
+                       
                     </tbody>
                 </table>
             </div>

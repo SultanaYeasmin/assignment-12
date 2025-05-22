@@ -16,6 +16,7 @@ import MyParcels from '../pages/Dashboard/Users/MyParcels';
 import MyProfile from '../pages/Dashboard/Users/MyProfile';
 import MyDeliveryList from '../pages/Dashboard/DeliveryMen/MyDeliveryList';
 import MyReviews from '../pages/Dashboard/DeliveryMen/MyReviews';
+import UpdateParcel from '../pages/Dashboard/Users/UpdateParcel';
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,12 @@ const router = createBrowserRouter([
           path: 'book-parcel',
           // element: <PrivateRoute><BookParcel/></PrivateRoute>,
           element: <BookParcel/>,
+        },
+        {
+          path: 'update-parcel/:id',
+          // element: <PrivateRoute><BookParcel/></PrivateRoute>,
+          element: <UpdateParcel/>,
+        
         },
         {
           path: 'my-parcels',
@@ -87,7 +94,8 @@ const router = createBrowserRouter([
         },
         {
           path:'statistics' ,
-          element: <PrivateRoute> <AdminRoute><Statistics/></AdminRoute> </PrivateRoute>,
+          element: <Statistics/>,
+          // element: <PrivateRoute> <AdminRoute><Statistics/></AdminRoute> </PrivateRoute>,
         }
         
       ]
