@@ -1,16 +1,19 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
 import { HelmetProvider } from 'react-helmet-async';
 import {
   QueryClient,
   QueryClientProvider,
-} from '@tanstack/react-query'
+} from '@tanstack/react-query';
 
-import { RouterProvider } from 'react-router-dom'
-import router from './routes/router'
-import AuthProvider from './providers/AuthProvider'
-import { Toaster } from 'react-hot-toast'
+import { RouterProvider } from 'react-router-dom';
+
+import router from './routes/router';
+
+import AuthProvider from './providers/AuthProvider';
+
+import { Toaster } from 'react-hot-toast';
 
 
 // Create a client
@@ -29,5 +32,13 @@ createRoot(document.getElementById('root')).render(
       </QueryClientProvider> 
       </HelmetProvider>
     </AuthProvider>
-  </StrictMode>,
+  </StrictMode>
 )
+
+
+// import React from 'react'
+// import ReactDOM from 'react-dom/client'
+
+// ReactDOM.createRoot(document.getElementById('root')).render(
+//   <h1>Hello Vite React</h1>
+// )

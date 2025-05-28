@@ -104,12 +104,32 @@ const router = createBrowserRouter([
 
 export default router;
 
-// ❖	Users Will See -
-//  Book a Parcel, My Parcels, My Profile menu in the sidebar.
+// // ❖	Users Will See -
+// //  Book a Parcel, My Parcels, My Profile menu in the sidebar.
 
-// ❖	Delivery Men Will See -
-//  My Delivery List, and My Reviews menu in the sidebar.
+// // ❖	Delivery Men Will See -
+// //  My Delivery List, and My Reviews menu in the sidebar.
 
-// ❖	Admin Will See - 
-// All Parcels, All Users, All Delivery Men,
-//  Statistics, menu in the sidebar.
+// // ❖	Admin Will See - 
+// // All Parcels, All Users, All Delivery Men,
+// //  Statistics, menu in the sidebar.
+
+
+// import { createBrowserRouter } from 'react-router-dom';
+// import App from "../App"
+// import Home from "../pages/Home/Home"
+
+// const router = createBrowserRouter([
+//   {
+//     path: '/',
+//     element: <App />, // this must render an <Outlet /> or <Home />
+//     children: [
+//       {
+//         path: '/',
+//         element: <Home />,
+//       },
+//     ],
+//   },
+// ]);
+
+// export default router;

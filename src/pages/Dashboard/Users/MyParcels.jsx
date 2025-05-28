@@ -15,7 +15,7 @@ const MyParcels = () => {
 
     const { isLoading, error, data: myParcels = [], refetch } = useQuery({
         queryKey: ['myParcels', user?.email],
-        queryFn: async() => {
+        queryFn: async () => {
             const { data } = await axiosSecure(`/my-parcels/${user?.email}`);
             return data;
         }
@@ -50,19 +50,19 @@ const MyParcels = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        
-                          {
-                          myParcels &&
-                          myParcels?.map((parcel, index) => (
+
+                        {
+                            myParcels &&
+                            myParcels?.map((parcel, index) => (
                                 <MyParcelDataRow
                                     refetch={refetch}
                                     index={index}
-                                    key={parcel._id}
                                     parcel={parcel}
+                                    key={parcel._id}
                                 />)
 
                             )}
-                       
+
                     </tbody>
                 </table>
             </div>
