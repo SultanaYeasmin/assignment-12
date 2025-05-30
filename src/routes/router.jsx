@@ -7,100 +7,107 @@ import DashboardLayout from '../layouts/DashboardLayout.jsX';
 import PrivateRoute from '../routes/PrivateRoute'
 import DeliveryMenRoute from '../routes/DeliveryMenRoute'
 import AdminRoute from '../routes/AdminRoute'
-import AllDeliveryMen from  '../pages/Dashboard/Admin/AllDeliveryMen';
-import AllParcels from  '../pages/Dashboard/Admin/AllParcels';
-import AllUsers from  '../pages/Dashboard/Admin/AllUsers';
-import Statistics from  '../pages/Dashboard/Admin/Statistics';
+import AllDeliveryMen from '../pages/Dashboard/Admin/AllDeliveryMen';
+import AllParcels from '../pages/Dashboard/Admin/AllParcels';
+import AllUsers from '../pages/Dashboard/Admin/AllUsers';
+import Statistics from '../pages/Dashboard/Admin/Statistics';
 import BookParcel from '../pages/Dashboard/Users/BookParcel';
 import MyParcels from '../pages/Dashboard/Users/MyParcels';
 import MyProfile from '../pages/Dashboard/Users/MyProfile';
 import MyDeliveryList from '../pages/Dashboard/DeliveryMen/MyDeliveryList';
 import MyReviews from '../pages/Dashboard/DeliveryMen/MyReviews';
 import UpdateParcel from '../pages/Dashboard/Users/UpdateParcel';
-
+import useAxiosSecure from '../hooks/useAxiosSecure';
+const axiosSecure = useAxiosSecure()
 
 const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <MainLayout/>,
-      errorElement: <ErrorPage />,
-    },
-    {
-      path: "/login",
-      element: <Login/>,
-    },
-    {
-      path: "/sign-up",
-      element: <SignUp/>,
-    },
-    {
-      path:'/dashboard',
-      // element: <PrivateRoute><DashboardLayout/></PrivateRoute>,
-      element: <DashboardLayout/>,
-      children:[
+  {
+    path: "/",
+    element: <MainLayout />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/sign-up",
+    element: <SignUp />,
+  },
+  {
+    path: '/dashboard',
+    // element: <PrivateRoute><DashboardLayout/></PrivateRoute>,
+    element: <DashboardLayout />,
+    children: [
 
-        //user-routes
-        {
-          path: 'book-parcel',
-          // element: <PrivateRoute><BookParcel/></PrivateRoute>,
-          element: <BookParcel/>,
-        },
-        {
-          path: 'update-parcel/:id',
-          // element: <PrivateRoute><BookParcel/></PrivateRoute>,
-          element: <UpdateParcel/>,
+      //user-routes
+      {
+        path: 'book-parcel',
+        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
+        element: <BookParcel />,
+      },
+      {
+        path: 'update-parcel/:id',
+        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
+        element: <UpdateParcel />,
+
+      },
+      {
+        path: 'my-parcels',
+        // element: <PrivateRoute><MyParcels/></PrivateRoute>,
+        element: <MyParcels />,
+      },
+      {
+        path: 'my-profile',
+        // element: <PrivateRoute><MyProfile/></PrivateRoute>,
+        element: <MyProfile />,
+      },
+
+
+      //delivery-man-routes
+      {
+        path: 'my-delivery-list',
+        // element: <PrivateRoute><DeliveryMenRoute><MyDeliveryList/></DeliveryMenRoute></PrivateRoute>,
+        element: <MyDeliveryList />,
+      },
+      {
+        path: 'my-reviews',
+        // element:<PrivateRoute><DeliveryMenRoute><MyReviews/></DeliveryMenRoute></PrivateRoute> ,
+        element: <MyReviews />,
+      },
+
+
+      //admin routes
+      {
+        path: 'all-parcels',
+        element: <AllParcels />,
         
+        // element:<PrivateRoute> <AdminRoute><AllParcels/></AdminRoute></PrivateRoute> ,
+      },
+      {
+        path: 'all-users',
+        // element:<PrivateRoute> <AdminRoute><AllUsers/></AdminRoute></PrivateRoute> ,  
+        element: <AllUsers />,
+        loader: async () => {
+          const res = await axiosSecure('/usersCount')
+          console.log("Loader Response:", res);
+          return res.data.count;
         },
-        {
-          path: 'my-parcels',
-          // element: <PrivateRoute><MyParcels/></PrivateRoute>,
-          element:<MyParcels/>,
-        },
-        {
-          path: 'my-profile',
-          // element: <PrivateRoute><MyProfile/></PrivateRoute>,
-          element: <MyProfile/>,
-        },
+      },
+      {
+        path: 'all-delivery-men',
+        // element:<PrivateRoute> <AdminRoute><AllDeliveryMen/></AdminRoute></PrivateRoute> ,
+        element: <AllDeliveryMen />,
+      },
+      {
+        path: 'statistics',
+        element: <Statistics />,
+        // element: <PrivateRoute> <AdminRoute><Statistics/></AdminRoute> </PrivateRoute>,
+      }
 
-
-        //delivery-man-routes
-        {
-          path: 'my-delivery-list',
-          // element: <PrivateRoute><DeliveryMenRoute><MyDeliveryList/></DeliveryMenRoute></PrivateRoute>,
-          element: <MyDeliveryList/>,
-        },
-        {
-          path: 'my-reviews',
-          // element:<PrivateRoute><DeliveryMenRoute><MyReviews/></DeliveryMenRoute></PrivateRoute> ,
-          element:<MyReviews/>,
-        },
-        
-
-        //admin routes
-        {
-          path: 'all-parcels',
-          element:<AllParcels/> ,
-          // element:<PrivateRoute> <AdminRoute><AllParcels/></AdminRoute></PrivateRoute> ,
-        },
-        {
-          path:'all-users' ,
-          // element:<PrivateRoute> <AdminRoute><AllUsers/></AdminRoute></PrivateRoute> ,
-          element:<AllUsers/>,
-        },
-        {
-          path: 'all-delivery-men',
-          // element:<PrivateRoute> <AdminRoute><AllDeliveryMen/></AdminRoute></PrivateRoute> ,
-          element: <AllDeliveryMen/> ,
-        },
-        {
-          path:'statistics' ,
-          element: <Statistics/>,
-          // element: <PrivateRoute> <AdminRoute><Statistics/></AdminRoute> </PrivateRoute>,
-        }
-        
-      ]
-    }
-  ]);
+    ]
+  }
+]);
 
 export default router;
 
@@ -110,7 +117,7 @@ export default router;
 // // ❖	Delivery Men Will See -
 // //  My Delivery List, and My Reviews menu in the sidebar.
 
-// // ❖	Admin Will See - 
+// // ❖	Admin Will See -
 // // All Parcels, All Users, All Delivery Men,
 // //  Statistics, menu in the sidebar.
 

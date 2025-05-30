@@ -5,14 +5,41 @@ import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 import useAuth from '../../../hooks/useAuth';
 import { Helmet } from 'react-helmet-async';
 import { GrUserAdmin } from "react-icons/gr";
+import { Pagination } from '@mui/material';
+import { useState } from 'react';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useQuery } from '@tanstack/react-query';
+import { useLoaderData } from 'react-router-dom';
 
 const AllUsers = () => {
-    const { user, loading } = useAuth();
+    const [currentPage, setCurrentPage] = useState(1);
+    const axiosSecure = useAxiosSecure();
+    const count = useLoaderData();
 
-    const { users, isLoading, error, refetch } = useAllUsers();
-    console.log(users)
+    const itemsPerPage = 5;
+    const noOfPages = Math.ceil(count / itemsPerPage);
+    // console.log();
+    console.log("items per page", itemsPerPage, "no of pages ", noOfPages,"count", count);
+
+    const { data: users = [], isLoading,
+        error, refetch } = useQuery({
+            queryKey: ['users', currentPage],
+
+            queryFn: async () => {
+                const { data } = await axiosSecure.get(`/all-users?page=${currentPage}&size=${itemsPerPage}`)
+                return data
+            }
+
+        })
+    console.log(typeof noOfPages)
 
     if (isLoading) return <LoadingSpinner />
+
+
+
+    const handleChange = (event,value) => {
+        setCurrentPage(value);
+    };
     return (
         <div>
             <Helmet>
@@ -44,7 +71,7 @@ const AllUsers = () => {
 
                                 <UserDataRow
                                     refetch={refetch}
-                                    index={index}
+                                    index={(currentPage - 1) * itemsPerPage + index }
                                     person={person}
                                     key={person._id}
 
@@ -54,6 +81,12 @@ const AllUsers = () => {
                         }
                     </tbody>
                 </table>
+            </div>
+
+            <div className='flex justify-center flex-col items-center my-10'>
+                <p className='text-sm text-gray-500 my-5'> You are now at Page no.: {currentPage}</p>
+                <Pagination count={noOfPages} color="primary" page={currentPage} onChange={handleChange} />
+                {/* <Pagination count={} color="primary" page={currentPage} onChange={handleChange} /> */}
             </div>
         </div>
     );

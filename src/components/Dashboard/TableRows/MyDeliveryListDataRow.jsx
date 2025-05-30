@@ -24,7 +24,7 @@ const MyDeliveryListDataRow = ({refetch, index, parcel }) => {
                             Swal.fire({
                                 position: "top-end",
                                 icon: "success",
-                                title: "role has been updated!",
+                                title: "status has been updated!",
                                 showConfirmButton: false,
                                 timer: 1500
                             })

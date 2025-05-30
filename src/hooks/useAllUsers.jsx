@@ -14,7 +14,7 @@ const useAllUsers = () => {
 
     })
 
-    console.log(users)
+    // console.log(users)
     return {users, isLoading, error, refetch}
 };
 

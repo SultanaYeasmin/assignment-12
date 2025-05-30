@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 const UserDataRow = ({refetch, index, person,  }) => {
     const axiosSecure = useAxiosSecure();
-    console.log(person)
+    // console.log(person)
     const { name, email, password, image, photoUrl, role, phone, _id } = person || {};
     const handleUserRole = (role) => {
         console.log(role)
@@ -38,10 +38,10 @@ const UserDataRow = ({refetch, index, person,  }) => {
             <td >{
                 role === "User"
                     ?
-                    <div className="flex justify-center">
+                    <div className="flex justify-start">
                         <button onClick={() => handleUserRole("Delivery Man")} className=""> <TbTruckDelivery className="text-blue-500" size="20" /></button></div>
                     :
-                    <div className="flex justify-center">
+                    <div className="flex justify-start">
                         <button className=""> <MdOutlineDisabledByDefault className="text-red-300" size="20" /></button>
                     </div>
 
@@ -50,11 +50,11 @@ const UserDataRow = ({refetch, index, person,  }) => {
             <td >{
                 role === "User"
                     ?
-                    <div className="flex justify-center">
+                    <div className="flex justify-start">
                         <button onClick={() => handleUserRole("Admin")} className=""> < GrUserAdmin className="text-green-600" size="20" /></button>
                     </div>
                     :
-                    <div className="flex justify-center">
+                    <div className="flex justify-start">
                         <button className=""> <MdOutlineDisabledByDefault className="text-red-300" size="20" /></button>
                     </div>
 

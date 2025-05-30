@@ -43,7 +43,7 @@ const MyParcelDataRow = ({ refetch, index, parcel }) => {
                 Swal.fire("Changes are not saved", "", "info");
             }
         })
-        : toast.error('You have already cancelled')
+        : toast.error(`Delivery is ${status}! You can not cancel now!`)
         }
 
 
