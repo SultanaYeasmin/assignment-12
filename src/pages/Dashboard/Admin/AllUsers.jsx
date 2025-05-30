@@ -85,7 +85,8 @@ const AllUsers = () => {
 
             <div className='flex justify-center flex-col items-center my-10'>
                 <p className='text-sm text-gray-500 my-5'> You are now at Page no.: {currentPage}</p>
-                <Pagination count={noOfPages} color="primary" page={currentPage} onChange={handleChange} />
+                <Pagination count={noOfPages} color="primary" 
+                page={currentPage} onChange={handleChange} />
                 {/* <Pagination count={} color="primary" page={currentPage} onChange={handleChange} /> */}
             </div>
         </div>

@@ -1,7 +1,5 @@
-import React from 'react';
 import useAxiosSecure from './useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-
 
 const useAllDeliveryMen = () => {
     const axiosSecure = useAxiosSecure();
@@ -14,7 +12,7 @@ const useAllDeliveryMen = () => {
 
     })
 
-    console.log(deliveryMen)
+    // console.log(deliveryMen)
     return {deliveryMen, isLoading, error}
 };
 

@@ -17,8 +17,9 @@ const AllParcels = () => {
         refetch } = useQuery({
             queryKey: ['parcels'],
             queryFn: async () => {
-                const { data } = await axiosSecure.get('/all-parcels');
-                return data;
+                const res = await axiosSecure.get('/all-parcels');
+                console.log(res)
+                return res.data.data;
             }
         }
         )
@@ -58,8 +59,8 @@ const AllParcels = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {parcelsDateRange && parcelsDateRange.length ? parcelsDateRange.map((parcel, index) => (
-                            <ParcelDataRow
+                        {parcelsDateRange && parcelsDateRange.length ? parcelsDateRange.map((parcel, index) => (  <ParcelDataRow
+                          
                                 refetch={refetch}
                                 index={index}
                                 key={parcel._id}
@@ -67,8 +68,8 @@ const AllParcels = () => {
                             />)
 
                         ) :
-                            parcels?.map((parcel, index) => (
-                                <ParcelDataRow
+                            parcels?.map((parcel, index) => (   <ParcelDataRow
+                             
                                     refetch={refetch}
                                     index={index}
                                     key={parcel._id}

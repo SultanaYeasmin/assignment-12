@@ -10,7 +10,8 @@ const AllDeliveryMen = () => {
     const { user, loading } = useAuth();
 
     const { deliveryMen, isLoading, error } = useAllDeliveryMen();
-    console.log(deliveryMen)
+    console.log(deliveryMen);
+    
     if (isLoading) return <LoadingSpinner />
     return (
         <div>
@@ -35,16 +36,14 @@ const AllDeliveryMen = () => {
                     </thead>
                     <tbody>
                         {deliveryMen &&
-
                             deliveryMen?.map((person, index) => (
-
                                 <DeliveryManDataRow
+                                
                                     index={index}
                                     person={person}
                                     key={person._id}
 
                                 />)
-
                             )
                         }
                     </tbody>

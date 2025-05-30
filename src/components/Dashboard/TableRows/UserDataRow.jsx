@@ -8,7 +8,9 @@ import Swal from "sweetalert2";
 const UserDataRow = ({refetch, index, person,  }) => {
     const axiosSecure = useAxiosSecure();
     // console.log(person)
+    
     const { name, email, password, image, photoUrl, role, phone, _id } = person || {};
+
     const handleUserRole = (role) => {
         console.log(role)
         axiosSecure.patch(`/user/${_id}`, { role: role })
