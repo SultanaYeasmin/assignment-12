@@ -31,9 +31,10 @@ const UserDataRow = ({ refetch, index, person, }) => {
 
     }
     const { data: noOfParcelsBooked = [] } = useQuery({
-        queryKey: ['noOfParcelsBooked'],
+        queryKey: ['noOfParcelsBooked', email],
         queryFn: async () => {
-            const { data } = axiosSecure.get(`/all-users/${email}`)
+            const { data } = await  axiosSecure.get(`/bookings/${email}`)
+            console.log(data.count)
             return data.count;
         }
     })
@@ -44,7 +45,7 @@ const UserDataRow = ({ refetch, index, person, }) => {
             <th>{index + 1}</th>
             <td>{name}</td>
             <td>{phone}</td>
-            <td>{noOfParcelsBooked}</td>
+            <td className="">{noOfParcelsBooked}</td>
             <td></td>
             <td>{role}</td>
             <td >{

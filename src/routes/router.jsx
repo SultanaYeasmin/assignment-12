@@ -90,7 +90,7 @@ const router = createBrowserRouter([
         element: <AllUsers />,
         loader: async () => {
           const res = await axiosSecure('/usersCount')
-          console.log("Loader Response:", res);
+          // console.log("Loader Response:", res);
           return res.data.count;
         },
       },
