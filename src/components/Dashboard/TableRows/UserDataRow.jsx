@@ -3,12 +3,13 @@ import { GrUserAdmin } from "react-icons/gr";
 import { MdOutlineDisabledByDefault } from "react-icons/md";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 
-const UserDataRow = ({refetch, index, person,  }) => {
+const UserDataRow = ({ refetch, index, person, }) => {
     const axiosSecure = useAxiosSecure();
     // console.log(person)
-    
+
     const { name, email, password, image, photoUrl, role, phone, _id } = person || {};
 
     const handleUserRole = (role) => {
@@ -16,7 +17,7 @@ const UserDataRow = ({refetch, index, person,  }) => {
         axiosSecure.patch(`/user/${_id}`, { role: role })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
-                     refetch();
+                    refetch();
                     Swal.fire({
                         position: "top-end",
                         icon: "success",
@@ -24,17 +25,26 @@ const UserDataRow = ({refetch, index, person,  }) => {
                         showConfirmButton: false,
                         timer: 1500
                     })
-                   
+
                 }
             })
-       
+
     }
+    const { data: noOfParcelsBooked = [] } = useQuery({
+        queryKey: ['noOfParcelsBooked'],
+        queryFn: async () => {
+            const { data } = axiosSecure.get(`/all-users/${email}`)
+            return data.count;
+        }
+    })
+
+
     return (
         <tr>
             <th>{index + 1}</th>
             <td>{name}</td>
             <td>{phone}</td>
-            <td>ll</td>
+            <td>{noOfParcelsBooked}</td>
             <td></td>
             <td>{role}</td>
             <td >{

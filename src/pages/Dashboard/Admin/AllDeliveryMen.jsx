@@ -38,7 +38,7 @@ const AllDeliveryMen = () => {
                         {deliveryMen &&
                             deliveryMen?.map((person, index) => (
                                 <DeliveryManDataRow
-                                
+
                                     index={index}
                                     person={person}
                                     key={person._id}

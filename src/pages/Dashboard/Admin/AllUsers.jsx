@@ -19,7 +19,7 @@ const AllUsers = () => {
     const itemsPerPage = 5;
     const noOfPages = Math.ceil(count / itemsPerPage);
     // console.log();
-    console.log("items per page", itemsPerPage, "no of pages ", noOfPages,"count", count);
+    // console.log("items per page", itemsPerPage, "no of pages ", noOfPages,"count", count);
 
     const { data: users = [], isLoading,
         error, refetch } = useQuery({
@@ -27,11 +27,11 @@ const AllUsers = () => {
 
             queryFn: async () => {
                 const { data } = await axiosSecure.get(`/all-users?page=${currentPage}&size=${itemsPerPage}`)
-                return data
+                return data.data
             }
 
         })
-    console.log(typeof noOfPages)
+    // console.log(typeof noOfPages)
 
     if (isLoading) return <LoadingSpinner />
 
