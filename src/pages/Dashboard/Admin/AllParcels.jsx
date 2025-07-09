@@ -51,7 +51,6 @@ const AllParcels = () => {
                             <th>Phone#</th>
                             <th>Booking Date</th>
                             <th>Req. Delivery Date</th>
-
                             <th>Cost</th>
                             <th>Status</th>
                             <th>Manage</th>
@@ -59,22 +58,22 @@ const AllParcels = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {parcelsDateRange && parcelsDateRange.length ? parcelsDateRange.map((parcel, index) => (  <ParcelDataRow
-                          
+                        {parcelsDateRange && parcelsDateRange.length ? parcelsDateRange.map((parcel, index) => (<ParcelDataRow
+
+                            refetch={refetch}
+                            index={index}
+                            key={parcel._id}
+                            parcel={parcel}
+                        />)
+
+                        ) :
+                            parcels?.map((parcel, index) => (<ParcelDataRow
+
                                 refetch={refetch}
                                 index={index}
                                 key={parcel._id}
                                 parcel={parcel}
                             />)
-
-                        ) :
-                            parcels?.map((parcel, index) => (   <ParcelDataRow
-                             
-                                    refetch={refetch}
-                                    index={index}
-                                    key={parcel._id}
-                                    parcel={parcel}
-                                />)
 
                             )
                         }

@@ -1,11 +1,22 @@
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import ReactApexChart from 'react-apexcharts';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const BarChart = () => {
+    const axiosSecure = useAxiosSecure()
+    const { data: bookingsData = [] } = useQuery({
+        queryKey: ["bookingsData"],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get('/bookings-by-date')
+            return data;
+        }
+    })
+    console.log(bookingsData)
     const [state, setState] = React.useState({
 
         series: [{
-            data: [400, 430, 448, 470, 540, 580, 690, 1100, 1200, 1380]
+            data: bookingsData?.count
         }],
         options: {
             chart: {
@@ -23,17 +34,15 @@ const BarChart = () => {
                 enabled: false
             },
             xaxis: {
-                categories: ['South Korea', 'Canada', 'United Kingdom', 'Netherlands', 'Italy', 'France', 'Japan',
-                    'United States', 'China', 'Germany'
-                ],
+                categories: bookingsData?.dates,
             }
         },
 
 
     });
     return (
-        <div>
-            <div id="chart">
+        <div className='my-10'>
+            <div id="chart" className='max-w-3xl mx-auto w-full'>
                 <ReactApexChart
                     options={state.options}
                     series={state.series}

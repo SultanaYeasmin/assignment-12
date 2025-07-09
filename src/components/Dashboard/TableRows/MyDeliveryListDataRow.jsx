@@ -2,8 +2,10 @@ import { MdDoneOutline } from "react-icons/md";
 import { RxCrossCircled } from "react-icons/rx";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import MapView from "../MapView/MapView";
+import ViewLocationModal from "../../Modal/ViewLocationModal";
 
-const MyDeliveryListDataRow = ({refetch, index, parcel }) => {
+const MyDeliveryListDataRow = ({ refetch, index, parcel }) => {
     const axiosSecure = useAxiosSecure();
     const { _id, name, email, phone_number, parcel_type, parcel_weight, price, receiver_name, receiver_phone_number, address, requested_delivery_date, latitude, longitude, status, delivery_man_ID, expected_delivery_date } = parcel || {}
     const handleParcelStatus = (status) => {
@@ -50,27 +52,34 @@ const MyDeliveryListDataRow = ({refetch, index, parcel }) => {
             <td>{expected_delivery_date}</td>
             <td>{receiver_phone_number}</td>
             <td>{address}</td>
-            <td>{ }</td>
-            <td>
-                {status !== "Cancelled" ? 
-                <div className="flex justify-center">
-                <button onClick={() => handleParcelStatus("Cancelled")} className=""> <RxCrossCircled className="text-gray-300 font-extrabold size-4" /> </button>
-            </div>
-             :
-             <div className="flex justify-center">
-                <button>  <RxCrossCircled className="text-red-700 font-extrabold size-4" /> </button>
-            </div>
-               }
+            <td className="my-1">
+                <ViewLocationModal
+                    
+                    latitude={latitude}
+                    longitude={longitude} />
             </td>
+
+            <td>
+                {status !== "Cancelled" ?
+                    <div className="flex justify-center">
+                        <button onClick={() => handleParcelStatus("Cancelled")} className=""> <RxCrossCircled className="text-gray-300 font-extrabold size-4" /> </button>
+                    </div>
+                    :
+                    <div className="flex justify-center">
+                        <button>  <RxCrossCircled className="text-red-700 font-extrabold size-4" /> </button>
+                    </div>
+                }
+            </td>
+
             <td>{
-                status !== "Delivered" ? 
-                <div className="flex justify-center">
-                    <button onClick={() => handleParcelStatus("Delivered")} className=""><MdDoneOutline className="text-gray-300 font-extrabold size-4"  /></button>
-                </div>
-                 : 
-                <div className="flex justify-center">
-                    <button className=""><MdDoneOutline className="text-green-700 font-extrabold size-4" /></button>
-                </div>
+                status !== "Delivered" ?
+                    <div className="flex justify-center">
+                        <button onClick={() => handleParcelStatus("Delivered")} className=""><MdDoneOutline className="text-gray-300 font-extrabold size-4" /></button>
+                    </div>
+                    :
+                    <div className="flex justify-center">
+                        <button className=""><MdDoneOutline className="text-green-700 font-extrabold size-4" /></button>
+                    </div>
 
             }
             </td>

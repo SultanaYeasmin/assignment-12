@@ -18,6 +18,7 @@ import MyDeliveryList from '../pages/Dashboard/DeliveryMen/MyDeliveryList';
 import MyReviews from '../pages/Dashboard/DeliveryMen/MyReviews';
 import UpdateParcel from '../pages/Dashboard/Users/UpdateParcel';
 import useAxiosSecure from '../hooks/useAxiosSecure';
+import Payment from '../pages/Dashboard/Payment/Payment';
 const axiosSecure = useAxiosSecure()
 
 const router = createBrowserRouter([
@@ -50,6 +51,12 @@ const router = createBrowserRouter([
         path: 'update-parcel/:id',
         // element: <PrivateRoute><BookParcel/></PrivateRoute>,
         element: <UpdateParcel />,
+
+      },
+      {
+        path: 'payment',
+        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
+        element: <Payment />,
 
       },
       {

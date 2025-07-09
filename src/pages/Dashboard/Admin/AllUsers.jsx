@@ -33,13 +33,13 @@ const AllUsers = () => {
         })
     // console.log(typeof noOfPages)
 
-    if (isLoading) return <LoadingSpinner />
 
-
-
-    const handleChange = (event,value) => {
+    const handleChange = (event, value) => {
         setCurrentPage(value);
     };
+
+    if (isLoading) return <LoadingSpinner />
+    
     return (
         <div>
             <Helmet>
@@ -56,7 +56,7 @@ const AllUsers = () => {
                             <th>SL#</th>
                             <th>users Name</th>
                             <th>Phone Number </th>
-                            <th>Booked Parcels#</th>
+                            <th>No of Booked Parcels</th>
                             <th>Total Spent Amount</th>
                             <th>Role</th>
                             <th>Make Delivery Men  </th>
@@ -71,7 +71,7 @@ const AllUsers = () => {
 
                                 <UserDataRow
                                     refetch={refetch}
-                                    index={(currentPage - 1) * itemsPerPage + index }
+                                    index={(currentPage - 1) * itemsPerPage + index}
                                     person={person}
                                     key={person._id}
 
@@ -85,8 +85,8 @@ const AllUsers = () => {
 
             <div className='flex justify-center flex-col items-center my-10'>
                 <p className='text-sm text-gray-500 my-5'> You are now at Page no.: {currentPage}</p>
-                <Pagination count={noOfPages} color="primary" 
-                page={currentPage} onChange={handleChange} />
+                <Pagination count={noOfPages} color="primary"
+                    page={currentPage} onChange={handleChange} />
                 {/* <Pagination count={} color="primary" page={currentPage} onChange={handleChange} /> */}
             </div>
         </div>

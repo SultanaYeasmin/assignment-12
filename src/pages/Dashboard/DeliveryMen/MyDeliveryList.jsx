@@ -11,7 +11,7 @@ const MyDeliveryList = () => {
     const { user, loading } = useAuth();
 
     const axiosSecure = useAxiosSecure();
-    const { data: parcels = [], isLoading,error,
+    const { data: parcels = [], isLoading, error,
         refetch } = useQuery({
             queryKey: ['parcels'],
             queryFn: async () => {
@@ -22,7 +22,7 @@ const MyDeliveryList = () => {
         )
 
     console.log(parcels)
-   
+
     if (isLoading) return <LoadingSpinner />
     return (
         <div>
@@ -57,7 +57,7 @@ const MyDeliveryList = () => {
                             parcels?.map((parcel, index) => (
 
                                 <MyDeliveryListDataRow
-                                refetch={refetch}
+                                    refetch={refetch}
                                     index={index}
                                     parcel={parcel}
                                     key={parcel._id}

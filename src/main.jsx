@@ -14,13 +14,15 @@ import router from './routes/router';
 import AuthProvider from './providers/AuthProvider';
 
 import { Toaster } from 'react-hot-toast';
-
+import App from "../src/App"
 
 // Create a client
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+   {/* <App/> */}
+   
     <AuthProvider>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
@@ -32,6 +34,7 @@ createRoot(document.getElementById('root')).render(
       </QueryClientProvider> 
       </HelmetProvider>
     </AuthProvider>
+  
   </StrictMode>
 )
 

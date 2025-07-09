@@ -1,10 +1,12 @@
-import React from 'react';
-import Navbar from '../../components/shared/Navbar';
+
+import Navbar from '../../components/Shared/Navbar';
+import Map from '../../components/Dashboard/Map/Map';
 
 const Home = () => {
     return (
         <div>
            <Navbar></Navbar>
+           <Map/>
         </div>
     );
 };

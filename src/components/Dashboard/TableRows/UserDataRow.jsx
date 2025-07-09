@@ -30,7 +30,7 @@ const UserDataRow = ({ refetch, index, person, }) => {
             })
 
     }
-    const { data: noOfParcelsBooked = [] } = useQuery({
+    const { data: noOfParcelsBooked = 0 } = useQuery({
         queryKey: ['noOfParcelsBooked', email],
         queryFn: async () => {
             const { data } = await  axiosSecure.get(`/bookings/${email}`)
@@ -45,7 +45,7 @@ const UserDataRow = ({ refetch, index, person, }) => {
             <th>{index + 1}</th>
             <td>{name}</td>
             <td>{phone}</td>
-            <td className="">{noOfParcelsBooked}</td>
+            <td>{noOfParcelsBooked}</td>
             <td></td>
             <td>{role}</td>
             <td >{
