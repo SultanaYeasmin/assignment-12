@@ -1,10 +1,26 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { useEffect, useState } from 'react';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 
-const CheckoutForm = () => {
+
+const CheckoutForm = ({price}) => {
+    const [error, setError] = useState('')
+    const [clientSecret, setClientSecret] = useState('')
     const stripe = useStripe();
     const elements = useElements();
+    const axiosSecure = useAxiosSecure();
+   
+    useEffect(() => {
+        if (price) {
+            axiosSecure.post('/create-payment-intent', { price: price })
+                .then(res => {
+                    console.log("client secret: ",res.data.clientSecret)
+                    setClientSecret(res.data.clientSecret)
+                })
 
+        }
+    }, [price])
 
     const handleSubmit = async (event) => {
         // Block native form submission.
@@ -33,14 +49,19 @@ const CheckoutForm = () => {
 
         if (error) {
             console.log('[error]', error);
+            setError(error.message)
         } else {
             console.log('[PaymentMethod]', paymentMethod);
+            setError('')
         }
+
+
+        
     };
 
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className='p-2'>
             <CardElement
                 options={{
                     style: {
@@ -57,9 +78,12 @@ const CheckoutForm = () => {
                     },
                 }}
             />
-            <button type="submit" disabled={!stripe}>
+            <button type="submit" disabled={!stripe || !clientSecret} className='btn btn-primary btn-xs m-2'>
                 Pay
             </button>
+            <p className='text-red-400 font-bold '>
+                {error}
+            </p>
         </form>
     );
 };
