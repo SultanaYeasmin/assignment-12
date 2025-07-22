@@ -90,7 +90,7 @@ const MyParcelDataRow = ({ refetch, index, parcel }) => {
                     </button>
                 </td>
                 <td>
-                    <Link state={{price : price}}  to={'/dashboard/payment'}>
+                    <Link state={{price, _id}}  to={'/dashboard/payment'}>
                         <button className="btn join-item btn-xs bg-green-100 ">
                             Pay
                         </button>
