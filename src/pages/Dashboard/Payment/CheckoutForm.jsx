@@ -86,7 +86,7 @@ const CheckoutForm = () => {
 
             // now save the payment in the database
             const payment = {
-                transaction_Id: paymentIntent.id,
+                transaction_id: paymentIntent.id,
                 date: new Date(),
                 email: user?.email,
                 price,
@@ -99,15 +99,16 @@ const CheckoutForm = () => {
             const res = await axiosSecure.post('/payments', payment);
 
             console.log('payment saved to database!', res?.data);
-            if (res.data?.insertedId) {
+            if (res.data?.result?.insertedId && res.data?.deleteResult?.deletedCount > 0) {
+                
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: 'Payment is successfully done!',
+                    title: 'WoW!',
                     showConfirmButton: false,
-                    timer: 1500
+                    timer: 1000
                 });
-                navigate('/dashboard')
+               navigate('/dashboard/payment-success');
             }
         }
     };
