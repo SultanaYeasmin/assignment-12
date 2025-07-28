@@ -63,9 +63,9 @@ const Navbar = () => {
                         </div></li>
                     </ul>
                 </div>
-                <Link to="/" className="btn btn-ghost text-lg font-extrabold">
+                <Link to="/" className="btn btn-ghost text-xl font-extrabold">
                     <img src={logo} alt="logo" className='w-10 h-10 mr-0' />
-                    <p className='text-orange-600 italic'>Transito</p>
+                    <p className='text-blue-600 italic'>Transito</p>
                 </Link>
             </div>
             <div className="navbar-center hidden lg:flex">

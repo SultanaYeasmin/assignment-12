@@ -20,6 +20,7 @@ import UpdateParcel from '../pages/Dashboard/Users/UpdateParcel';
 import useAxiosSecure from '../hooks/useAxiosSecure';
 import Payment from '../pages/Dashboard/Payment/Payment';
 import PaymentSuccess from '../pages/Dashboard/Payment/PaymentSuccess';
+import Home from '../pages/Home/Home';
 
 
 
@@ -30,6 +31,13 @@ const router = createBrowserRouter([
     path: "/",
     element: <MainLayout />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/',
+        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
+        element: <Home />,
+      },
+    ]
   },
   {
     path: "/login",
@@ -54,7 +62,7 @@ const router = createBrowserRouter([
       {
         path: 'payment-success',
         // element: <PrivateRoute><BookParcel/></PrivateRoute>,
-        element: <PaymentSuccess/>,
+        element: <PaymentSuccess />,
       },
       {
         path: 'update-parcel/:id',
@@ -97,7 +105,7 @@ const router = createBrowserRouter([
       {
         path: 'all-parcels',
         element: <AllParcels />,
-        
+
         // element:<PrivateRoute> <AdminRoute><AllParcels/></AdminRoute></PrivateRoute> ,
       },
       {

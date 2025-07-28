@@ -1,12 +1,16 @@
 
 import Navbar from '../../components/Shared/Navbar';
-import Map from '../../components/Dashboard/Map/Map';
+
+import Banner from '../../components/Home/Banner';
+import Features from '../../components/Home/Features';
+import AppUsage from '../../components/Home/AppUsage';
 
 const Home = () => {
     return (
         <div>
-           <Navbar></Navbar>
-           <Map/>
+            <Banner />
+            <Features />
+            <AppUsage />
         </div>
     );
 };
