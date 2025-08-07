@@ -66,6 +66,7 @@ const Login = () => {
             </div>
             <SocialLogin />
             <p className='text-gray-400 px-8'>
+              
               Don't have an account yet? <Link to='/sign-up'><span className='text-gray-600'>Sign up</span></Link>
             </p>
           </form>

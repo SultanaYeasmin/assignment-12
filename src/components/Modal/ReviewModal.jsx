@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import useAuth from '../../hooks/useAuth'
 
 
-const ReviewModal = ({ refetch, delivery_man_ID }) => {
+const ReviewModal = ({ disabled, refetch, delivery_man_ID }) => {
 
   let [isOpen, setIsOpen] = useState(false);
   const axiosSecure = useAxiosSecure();
@@ -17,7 +17,10 @@ const ReviewModal = ({ refetch, delivery_man_ID }) => {
   const { user } = useAuth();
   const deliveryMenRating = [1, 2, 3, 4, 5]
   function open() {
-    setIsOpen(true)
+    if (!disabled) {
+      setIsOpen(true)
+    }
+
   }
 
   function close() {
@@ -238,7 +241,7 @@ const ReviewModal = ({ refetch, delivery_man_ID }) => {
                           className="inline-flex items-center gap-2 rounded-md bg-green-300 px-3 py-1.5 text-sm/6 font-semibold text-green-800 shadow-inner shadow-white/10 
                      w-full justify-center
                      focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"
-                        >Assign</Button>
+                        >Give Review!</Button>
 
                         <Button
                           className="inline-flex items-center gap-2 rounded-md bg-gray-300 px-3 py-1.5 text-sm/6 font-semibold text-gray-800 shadow-inner shadow-white/10  w-full justify-center    focus:not-data-focus:outline-none data-focus:outline data-focus:outline-white data-hover:bg-gray-600 data-open:bg-gray-700"

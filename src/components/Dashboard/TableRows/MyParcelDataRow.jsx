@@ -85,12 +85,13 @@ const MyParcelDataRow = ({ refetch, index, parcel }) => {
                         type="button"
                         className=''>
                         <ReviewModal
+                            disabled={status !== "Delivered"}
                             refetch={refetch}
                             delivery_man_ID={delivery_man_ID} />
                     </button>
                 </td>
                 <td>
-                    <Link state={{price, _id}}  to={'/dashboard/payment'}>
+                    <Link state={{ price, _id }} to={'/dashboard/payment'}>
                         <button className="btn join-item btn-xs bg-green-100 ">
                             Pay
                         </button>

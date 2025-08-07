@@ -4,6 +4,7 @@ import Navbar from '../../components/Shared/Navbar';
 import Banner from '../../components/Home/Banner';
 import Features from '../../components/Home/Features';
 import AppUsage from '../../components/Home/AppUsage';
+import TopDeliveryMen from '../../components/Home/TopDeliveryMen';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <Banner />
             <Features />
             <AppUsage />
+            <TopDeliveryMen/>
         </div>
     );
 };
