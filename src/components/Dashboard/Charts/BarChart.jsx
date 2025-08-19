@@ -1,24 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const BarChart = () => {
-    const axiosSecure = useAxiosSecure()
-    const { data: bookingsData = [] } = useQuery({
+    const axiosSecure = useAxiosSecure();
+
+    const { data: bookingsData = {}, isLoading } = useQuery({
         queryKey: ["bookingsData"],
         queryFn: async () => {
             const { data } = await axiosSecure.get('/bookings-by-date')
             return data;
         }
     })
-    console.log(bookingsData)
-    const [state, setState] = React.useState({
+    
+    //console.log(bookingsData);
 
-        series: [{
+    const series= [{
             data: bookingsData?.count
-        }],
-        options: {
+        }]
+     const options= {
             chart: {
                 type: 'bar',
                 height: 350
@@ -36,16 +36,17 @@ const BarChart = () => {
             xaxis: {
                 categories: bookingsData?.dates,
             }
-        },
+        }
 
-
-    });
+    if (isLoading) {
+        return <div className="text-center py-10 text-primary text-xl italic underline">Loading chart...</div>;
+    }
     return (
         <div className='my-10'>
             <div id="chart" className='max-w-3xl mx-auto w-full'>
                 <ReactApexChart
-                    options={state.options}
-                    series={state.series}
+                    options={options}
+                    series={series}
                     type="bar"
                     height={350} />
             </div>
@@ -56,7 +57,3 @@ const BarChart = () => {
 
 export default BarChart;
 
-
-
-// const domContainer = document.querySelector('#app');
-// ReactDOM.render(<BarChart />, domContainer);

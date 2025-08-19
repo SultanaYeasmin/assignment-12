@@ -13,7 +13,7 @@ const UpdateParcel = () => {
     const [weight, setWeight] = useState(null);
     const [priceUpdated, setPriceUpdated] = useState(null);
     const { id } = useParams();
-    console.log(id)
+    //console.log(id)
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
 
@@ -27,10 +27,10 @@ const UpdateParcel = () => {
 
     })
       if (isLoading) return <LoadingSpinner />
-    console.log("parcel for update details", parcelForUpdate)
+    //console.log("parcel for update details", parcelForUpdate)
     const { _id, name, email, phone_number, parcel_type, parcel_weight, price, receiver_name, receiver_phone_number, address, requested_delivery_date, latitude, longitude, status, delivery_man_ID, expected_delivery_date, booking_date } = parcelForUpdate || {}
 
-    console.log(weight, "updated")
+    //console.log(weight, "updated")
 
     const user_name = user?.displayName;
     const user_email = user?.email;
@@ -92,10 +92,10 @@ const UpdateParcel = () => {
             status: 'Pending',
             booking_date: bookingDate
         }
-        console.log(updatedBooking);
+        //console.log(updatedBooking);
         axiosSecure.put(`/update-a-parcel/${_id}`, updatedBooking)
             .then(res => {
-                console.log(res.data)
+                //console.log(res.data)
                 if (res.data.modifiedCount > 0) {
                     Swal.fire({
                         position: "top-end",
@@ -111,15 +111,15 @@ const UpdateParcel = () => {
     }
 
     return (
-        <div className='text-gray-950 p-4'>
+        <div className='text-base-content p-4'>
             <Helmet>
                 <title>Update Parcel | Dashboard</title>
             </Helmet>
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col">
                     <div className="text-center">
-                        <h1 className="text-3xl font-bold">Update Parcel!</h1>
-                        <p className="py-6 px-12">
+                        <h1 className="text-center mt-10 text-primary text-xl italic underline">Update Parcel!</h1>
+                        <p className="px-12 mt-4 text-textMuted">
                             Want to book a parcel ? Fill up the below form!
                         </p>
                     </div>

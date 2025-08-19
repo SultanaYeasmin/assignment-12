@@ -22,7 +22,7 @@ const MyParcels = () => {
             return data;
         }
     })
-    console.log(myParcels);
+    //console.log(myParcels);
 
     if (isLoading) return <LoadingSpinner />
     if (error) return <ErrorPage />
@@ -32,10 +32,10 @@ const MyParcels = () => {
             <Helmet>
                 My Parcels | Dashboard
             </Helmet>
-            <div className='text-center my-10 text-blue-600'>
+            <div className='text-center mt-10 text-primary text-xl italic underline'>
                 My parcels
             </div>
-            <div className='flex justify-center mt-5 mb-32'>
+            <div className='flex justify-center mt-5 mb-5'>
                 <div className="dropdown dropdown-right">
                     <label tabIndex={0} className="btn m-1">Filter booking by status</label>
                     <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">

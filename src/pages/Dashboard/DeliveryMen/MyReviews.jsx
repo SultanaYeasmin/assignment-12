@@ -23,7 +23,7 @@ const MyReviews = () => {
         }
         )
 
-    console.log(myReviews);
+    //console.log(myReviews);
 
     if (isLoading) return <LoadingSpinner />
 
@@ -32,7 +32,7 @@ const MyReviews = () => {
             <Helmet>
                 <title> My Reviews | Dashboard</title>
             </Helmet>
-            <h1 className='text-center font-bold text-lg my-10'>My Delivery Reviews</h1>
+            <h1 className='text-center my-10 text-primary text-xl italic underline'>My Delivery Reviews</h1>
             <div className='grid md:grid-cols-2 gap-10 px-5 justify-center md:justify-between items-center'>
                 {
                     myReviews.map((review) => {

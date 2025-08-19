@@ -11,7 +11,7 @@ const MyReviewCard = ({ review }) => {
         feedback,
         reviewDate,
     } = review;
-    console.log(typeof rating)
+    //console.log(typeof rating)
     return (
         <div className="card bg-base-100 w-full shadow-2xl">
             <div className="card-body">

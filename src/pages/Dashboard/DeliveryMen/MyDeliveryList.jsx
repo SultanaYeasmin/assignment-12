@@ -21,7 +21,7 @@ const MyDeliveryList = () => {
         }
         )
 
-    console.log(parcels)
+    //console.log(parcels)
 
     if (isLoading) return <LoadingSpinner />
     return (
@@ -30,7 +30,7 @@ const MyDeliveryList = () => {
                 <title> My Delivery List | Dashboard</title>
             </Helmet>
 
-            <div className='text-center my-10 text-blue-600'>
+            <div className='text-center my-10 text-primary text-xl italic underline'>
                 My Delivery List
             </div>
             <div className="overflow-x-auto p-5">

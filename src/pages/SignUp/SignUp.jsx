@@ -24,7 +24,7 @@ const SignUp = () => {
     const photoUrl = await imageUpload(image);
     const role = form.role.value;
 
-    console.log({ name, email, password, image, photoUrl,role, phone })
+    //console.log({ name, email, password, image, photoUrl,role, phone })
     createUser(email, password)
       .then((userCredential) => {
         // Signed up 
@@ -33,7 +33,7 @@ const SignUp = () => {
         updateUserProfile(name, photoUrl)
           .then(() => {
             // Profile updated!
-            console.log(user);
+            //console.log(user);
              saveUserData(user, role, phone)
             navigate('/')
             toast.success("sign-up successfully done!")
@@ -44,7 +44,7 @@ const SignUp = () => {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error)
+        //console.log(error)
         toast.error(errorMessage)
       });
   }
@@ -107,13 +107,13 @@ const SignUp = () => {
 
             </div>
             <div className="form-control mt-6">
-              <button type='submit' className="btn btn-primary ">Sign Up</button>
+              <button type='submit' className="btn btn-primary hover:text-white">Sign Up</button>
             </div>
           </form>
           <SocialLogin />
           <p className='text-gray-400 px-8 py-6'>
             Already have an account?
-            <Link to='/login'><span className='text-gray-600 ml-4'>Login</span></Link>
+            <Link to='/login'><span className='text-gray-600 ml-4 hover:text-primary hover:underline'>Login</span></Link>
           </p>
 
         </div>

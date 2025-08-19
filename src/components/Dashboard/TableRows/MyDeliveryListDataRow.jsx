@@ -9,7 +9,7 @@ const MyDeliveryListDataRow = ({ refetch, index, parcel }) => {
     const axiosSecure = useAxiosSecure();
     const { _id, name, email, phone_number, parcel_type, parcel_weight, price, receiver_name, receiver_phone_number, address, requested_delivery_date, latitude, longitude, status, delivery_man_ID, expected_delivery_date } = parcel || {}
     const handleParcelStatus = (status) => {
-        console.log(status)
+        //console.log(status)
         Swal.fire({
             title: "Do you want to save the changes?",
             showDenyButton: true,
@@ -40,7 +40,7 @@ const MyDeliveryListDataRow = ({ refetch, index, parcel }) => {
 
 
     }
-    console.log(parcel)
+    //console.log(parcel)
 
     return (
         <tr>

@@ -4,7 +4,7 @@ export default function Search() {
     return (
         <>
             <div className="flex justify-center">
-                <label className="input flex items-center gap-2 max-w-lg mt-10">
+                <label className="input flex items-center gap-2 max-w-lg my-4 md:my-6">
                     <svg
                         className="h-[1em] opacity-50"
                         xmlns="http://www.w3.org/2000/svg"

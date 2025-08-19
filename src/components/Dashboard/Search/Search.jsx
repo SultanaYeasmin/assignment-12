@@ -24,7 +24,7 @@ const Search = ({ parcels, parcelsDateRange, setParcelsDateRange }) => {
 
             return requested_date >= new Date(date_from) && requested_date <= new Date(date_to)
         })
-        console.log(parcelsWithinRange);
+        //console.log(parcelsWithinRange);
         setParcelsDateRange(parcelsWithinRange)
 
     }
@@ -38,22 +38,22 @@ const Search = ({ parcels, parcelsDateRange, setParcelsDateRange }) => {
     return (
         <>
             <form onSubmit={handleSearch} className="card-body">
-                <div className="flex gap-4 p-10 justify-center">
-                    <label className="input input-bordered input-sm flex items-center gap-2">
-                        <span className="text-green-600 font-bold"> Requested-Date from </span>
-                        <input type="date" name="dateFrom" className="grow"
+                <div className="flex gap-4 px-2 sm:px-4 md:px-6 justify-center flex-col md:flex-row">
+                    <label className="input input-bordered input-sm flex items-center gap-2 sm:gap-4 w-full md:w-auto">
+                        <span className="text-green-600">From </span>
+                        <input type="date" name="dateFrom" className="grow text-gray-400"
                          value={date_from}
                          onChange={(e)=> setDateFrom(e.target.value)}
                          />
                     </label>
-                    <label className="input input-bordered input-sm flex items-center gap-2">
-                        <span className="text-green-600 font-bold">Requested-Date to </span>
-                        <input type="date" name="dateTo" className="grow"
+                    <label className="input input-bordered input-sm flex items-center gap-2 sm:gap-4 w-full md:w-auto">
+                        <span className="text-green-600" >To </span>
+                        <input type="date" name="dateTo" className="grow text-gray-400"
                          value={date_to}
                            onChange={(e)=> setDateTo(e.target.value)}/>
                     </label>
-                    <label className="input input-bordered input-sm flex items-center gap-2">
-                        <input type="submit" className="grow" value="Search" />
+                    <label className="input input-bordered input-sm flex items-center gap-2 sm:gap-4 w-full md:w-auto">
+                        <input type="submit" className="grow text-gray-400" value="Search" />
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
@@ -65,8 +65,8 @@ const Search = ({ parcels, parcelsDateRange, setParcelsDateRange }) => {
                                 clipRule="evenodd" />
                         </svg>
                     </label>
-                    <label className="input input-bordered input-sm flex items-center gap-2">
-                        <input type="button" className="grow" value="Reset"
+                    <label className="input input-bordered input-sm flex items-center gap-2 sm:gap-4 w-full md:w-auto">
+                        <input type="button" className="grow text-gray-400" value="Reset"
                             onClick={handleReset}
                         />
                         <GrPowerReset />

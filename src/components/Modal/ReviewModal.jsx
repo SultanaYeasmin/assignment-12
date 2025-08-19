@@ -27,7 +27,7 @@ const ReviewModal = ({ disabled, refetch, delivery_man_ID }) => {
     setIsOpen(false)
   }
 
-  console.log(selected)
+  //console.log(selected)
 
   const handleManageReview = async (e) => {
     //  phone_number: phoneNumber,
@@ -52,11 +52,11 @@ const ReviewModal = ({ disabled, refetch, delivery_man_ID }) => {
       reviewDate,
     }
 
-    console.log(reviewData);
+    //console.log(reviewData);
 
     axiosSecure.post('/review-delivery-man', reviewData)
       .then(res => {
-        console.log(res.data)
+        //console.log(res.data)
         if (res.data.insertedId) {
 
           Swal.fire({

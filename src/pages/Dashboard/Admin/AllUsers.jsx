@@ -18,8 +18,8 @@ const AllUsers = () => {
 
     const itemsPerPage = 5;
     const noOfPages = Math.ceil(count / itemsPerPage);
-    // console.log();
-    // console.log("items per page", itemsPerPage, "no of pages ", noOfPages,"count", count);
+    // //console.log();
+    // //console.log("items per page", itemsPerPage, "no of pages ", noOfPages,"count", count);
 
     const { data: users = [], isLoading,
         error, refetch } = useQuery({
@@ -31,7 +31,7 @@ const AllUsers = () => {
             }
 
         })
-    // console.log(typeof noOfPages)
+    // //console.log(typeof noOfPages)
 
 
     const handleChange = (event, value) => {
@@ -46,7 +46,7 @@ const AllUsers = () => {
                 <title> All Users | Dashboard</title>
             </Helmet>
 
-            <div className='text-center my-10 text-blue-600'>
+            <div className='text-center my-10 text-primary text-xl italic underline'>
                 All Users
             </div>
             <div className="overflow-x-auto p-5">

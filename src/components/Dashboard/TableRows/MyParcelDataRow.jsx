@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 
 const MyParcelDataRow = ({ refetch, index, parcel }) => {
 
-    console.log(parcel)
+    //console.log(parcel)
     const { _id, name, email, phone_number,
         parcel_type, parcel_weight, price, receiver_name,
         receiver_phone_number, address, requested_delivery_date,
@@ -18,7 +18,7 @@ const MyParcelDataRow = ({ refetch, index, parcel }) => {
     const axiosSecure = useAxiosSecure();
     const handleCancel = (x) => {
 
-        console.log(x, _id)
+        //console.log(x, _id)
         {
             status === "Pending" ?
                 Swal.fire({

@@ -16,7 +16,7 @@ const BookParcel = () => {
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
 
-    console.log(weight)
+    //console.log(weight)
 
     const user_name = user?.displayName;
     const user_email = user?.email;
@@ -78,10 +78,10 @@ const BookParcel = () => {
             status: 'Pending',
             booking_date: bookingDate
         }
-        console.log(newBooking);
+        //console.log(newBooking);
         axiosSecure.post('/book-a-parcel', newBooking)
             .then(res => {
-                console.log(res.data)
+                //console.log(res.data)
                 if (res.data.insertedId) {
                     Swal.fire({
                         position: "top-end",
@@ -97,15 +97,15 @@ const BookParcel = () => {
     }
 
     return (
-        <div className='text-gray-950 p-4'>
+        <div className='text-base-content px-4'>
             <Helmet>
                 <title>Booking | Dashboard</title>
             </Helmet>
             <div className="hero min-h-screen">
                 <div className="hero-content flex-col">
                     <div className="text-center">
-                        <h1 className="text-3xl font-bold">Book a Parcel!</h1>
-                        <p className="py-6 px-12">
+                        <h1 className="text-center mt-10 text-primary text-xl italic underline">Book a Parcel!</h1>
+                        <p className="px-12 mt-4 text-textMuted">
                             Want to book a parcel ? Fill up the below form!
                         </p>
                     </div>

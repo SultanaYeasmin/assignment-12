@@ -12,11 +12,11 @@ const useRole = () => {
         enabled: !loading && !!user?.email,
         queryFn: async () => {
             const { data } = await axiosSecure(`/users/role/${user?.email}`)
-            console.log(data);
+            //console.log(data);
             return data.role;
         },
     })
-    console.log(role);
+    //console.log(role);
     return [role, isLoading ]
 };
 

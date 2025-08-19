@@ -27,12 +27,12 @@ const MyProfile = () => {
         updateUserProfile(user?.displayName, photoUrl)
             .then(() => {
                 // Profile updated!
-                console.log(user);
+                //console.log(user);
                
-                console.log("updated", user);
+                //console.log("updated", user);
                 axiosSecure.patch(`/user/profile/${user?.email}`, { image: photoUrl })
                     .then(res => {
-                        console.log(res.data)
+                        //console.log(res.data)
                         if (res.data.modifiedCount > 0) {
                             setPhoto(photoUrl)
                             toast.success("Profile Image successfully Updated!")
@@ -47,12 +47,15 @@ const MyProfile = () => {
 
     }
     return (
-        <div className="flex items-center justify-center mt-5 ">
+        <div className="flex items-center justify-center mt-5 "
+        >
             <Helmet>
                 <title>My Profile | Dashboard</title>
             </Helmet>
 
-            <div className="card bg-base-100 w-96 shadow-md">
+            <div className="card bg-base-100 w-96 shadow-md" 
+          
+            >
                 <figure>
                     <img
                         src={profileImage}
@@ -70,7 +73,7 @@ const MyProfile = () => {
                         {user?.displayName}
                         <div className="badge badge-primary">{role}</div>
                     </h2>
-                    <p className="text-center text-sm"><span className="text-green-700 text-extrabold">Email:</span> {user?.email}</p>
+                    <p className="text-center text-sm"><span className="text-primary text-extrabold">Email:</span> {user?.email}</p>
                     {/* <div className="card-actions justify-center">
                         <div className="badge badge-outline"></div>
                         <div className="badge badge-outline"></div>
@@ -87,7 +90,7 @@ const MyProfile = () => {
                             </label>
                             <input type="file"
                                 name='image'
-                                className="file-input  file-input-bordered" />
+                                className="file-input file-input-bordered" />
                         </div>
 
 

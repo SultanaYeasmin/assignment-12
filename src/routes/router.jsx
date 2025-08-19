@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
+       
         element: <Home />,
       },
     ]
@@ -49,84 +49,84 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    // element: <PrivateRoute><DashboardLayout/></PrivateRoute>,
-    element: <DashboardLayout />,
+    element: <PrivateRoute><DashboardLayout/></PrivateRoute>,
+    
     children: [
 
       //user-routes
       {
         path: 'book-parcel',
-        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
-        element: <BookParcel />,
+        element: <BookParcel/>,
+        // element: <BookParcel />,
       },
       {
         path: 'payment-success',
-        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
-        element: <PaymentSuccess />,
+        element: <PaymentSuccess/>,
+        // element: <PaymentSuccess />,
       },
       {
         path: 'update-parcel/:id',
-        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
-        element: <UpdateParcel />,
+        element: <UpdateParcel/>,
+        // element: <UpdateParcel />,
 
       },
       {
         path: 'payment',
-        // element: <PrivateRoute><BookParcel/></PrivateRoute>,
-        element: <Payment />,
+        element: <Payment/>,
+        // element: <Payment />,
 
       },
       {
         path: 'my-parcels',
-        // element: <PrivateRoute><MyParcels/></PrivateRoute>,
-        element: <MyParcels />,
+        element: <MyParcels/>,
+        // element: <MyParcels />,
       },
       {
         path: 'my-profile',
-        // element: <PrivateRoute><MyProfile/></PrivateRoute>,
-        element: <MyProfile />,
+        element: <MyProfile/>,
+        // element: <MyProfile />,
       },
 
 
       //delivery-man-routes
       {
         path: 'my-delivery-list',
-        // element: <PrivateRoute><DeliveryMenRoute><MyDeliveryList/></DeliveryMenRoute></PrivateRoute>,
-        element: <MyDeliveryList />,
+        element: <DeliveryMenRoute><MyDeliveryList/></DeliveryMenRoute>,
+        // element: <MyDeliveryList />,
       },
       {
         path: 'my-reviews',
-        // element:<PrivateRoute><DeliveryMenRoute><MyReviews/></DeliveryMenRoute></PrivateRoute> ,
-        element: <MyReviews />,
+        element:<DeliveryMenRoute><MyReviews/></DeliveryMenRoute> ,
+        // element: <MyReviews />,
       },
 
 
       //admin routes
       {
         path: 'all-parcels',
-        element: <AllParcels />,
+        // element: <AllParcels />,
 
-        // element:<PrivateRoute> <AdminRoute><AllParcels/></AdminRoute></PrivateRoute> ,
+        element: <AdminRoute><AllParcels/></AdminRoute> ,
       },
       {
         path: 'all-users',
-        // element:<PrivateRoute> <AdminRoute><AllUsers/></AdminRoute></PrivateRoute> ,  
-        element: <AllUsers />,
+        element: <AdminRoute><AllUsers/></AdminRoute> ,  
+        // element: <AllUsers />,
         loader: async () => {
           const res = await axiosSecure('/usersCount')
-          // console.log("Loader Response:", res);
+          // //console.log("Loader Response:", res);
           return res.data.count;
         },
       },
       {
         path: 'all-delivery-men',
-        // element:<PrivateRoute> <AdminRoute><AllDeliveryMen/></AdminRoute></PrivateRoute> ,
-        element: <AllDeliveryMen />,
+        element: <AdminRoute><AllDeliveryMen/></AdminRoute> ,
+        // element: <AllDeliveryMen />,
       },
       {
         path: 'statistics',
-        element: <Statistics />,
-        // element: <PrivateRoute> <AdminRoute><Statistics/></AdminRoute> </PrivateRoute>,
+        // element: <Statistics />,
+        element:  <AdminRoute><Statistics/></AdminRoute> ,
       }
 
     ]

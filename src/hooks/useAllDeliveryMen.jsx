@@ -12,7 +12,7 @@ const useAllDeliveryMen = () => {
 
     })
 
-    // console.log(deliveryMen)
+    // //console.log(deliveryMen)
     return {deliveryMen, isLoading, error}
 };
 

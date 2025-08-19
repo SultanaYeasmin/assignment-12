@@ -25,7 +25,7 @@ const ManageParcelModal = ({ id, refetch }) => {
     setIsOpen(false)
   }
 
-  console.log(deliveryMen)
+  //console.log(deliveryMen)
 
 
   if (isLoading) return <LoadingSpinner />
@@ -37,7 +37,7 @@ const ManageParcelModal = ({ id, refetch }) => {
     const form = e.target;
     const expected_delivery_date = form.expectedDeliveryDate.value;
     const delivery_man = selected._id;
-    console.log("admin assignment",{ expected_delivery_date, delivery_man });
+    //console.log("admin assignment",{ expected_delivery_date, delivery_man });
    
     if (!selected._id) {
       Swal.fire({
@@ -63,7 +63,7 @@ const ManageParcelModal = ({ id, refetch }) => {
       expected_delivery_date
     })
       .then(res => {
-        console.log(res.data)
+        //console.log(res.data)
         if (res.data.modifiedCount > 0) {
            refetch();
           Swal.fire({

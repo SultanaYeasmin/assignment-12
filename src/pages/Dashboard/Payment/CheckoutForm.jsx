@@ -18,14 +18,14 @@ const CheckoutForm = () => {
     const navigate = useNavigate();
     const location = useLocation()
     const { price, _id } = location.state || {};
-    console.log('payment price & id', price, _id,)
+    //console.log('payment price & id', price, _id,)
 
 
     useEffect(() => {
         if (price) {
             axiosSecure.post('/create-payment-intent', { price: price })
                 .then(res => {
-                    console.log("client secret: ", res.data.clientSecret)
+                    //console.log("client secret: ", res.data.clientSecret)
                     setClientSecret(res.data.clientSecret)
                 })
         }
@@ -57,10 +57,10 @@ const CheckoutForm = () => {
         });
 
         if (error) {
-            console.log('[error]', error);
+            //console.log('[error]', error);
             setError(error.message)
         } else {
-            console.log('[PaymentMethod]', paymentMethod);
+            //console.log('[PaymentMethod]', paymentMethod);
             setError('')
         }
 
@@ -77,9 +77,9 @@ const CheckoutForm = () => {
             },
             );
         if (cardConfirmError) {
-            console.log('confirm error!', cardConfirmError)
+            //console.log('confirm error!', cardConfirmError)
         } else {
-            console.log('payment intent:', paymentIntent, paymentIntent?.status)
+            //console.log('payment intent:', paymentIntent, paymentIntent?.status)
         }
 
         if (paymentIntent?.status === 'succeeded') {
@@ -92,13 +92,13 @@ const CheckoutForm = () => {
                 price,
                 bookings_id: _id,
             }
-            console.log('payment object:', payment)
+            //console.log('payment object:', payment)
             setTransactionId(paymentIntent.id);
-            console.log('transaction ID', transactionId);
+            //console.log('transaction ID', transactionId);
 
             const res = await axiosSecure.post('/payments', payment);
 
-            console.log('payment saved to database!', res?.data);
+            //console.log('payment saved to database!', res?.data);
             if (res.data?.result?.insertedId && res.data?.deleteResult?.deletedCount > 0) {
                 
                 Swal.fire({

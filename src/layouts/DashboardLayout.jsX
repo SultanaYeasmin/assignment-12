@@ -6,16 +6,19 @@ import useRole from '../hooks/useRole';
 import LoadingSpinner from '../components/Shared/LoadingSpinner';
 
 
-
 const DashboardLayout = () => {
    
     return (
-        <div className='flex'>
+        
+        <div className='relative min-h-screen md:flex'>
             <div>
-                <Sidebar className="w-1/3"></Sidebar>
+                <Sidebar></Sidebar>
             </div>
-            <div className='flex-1'>
-                <Outlet />
+            <div className="flex-1 lg:ml-64">
+                <div className='md:p-6 p-2'>
+                     <Outlet />
+                </div>
+               
             </div>
 
         </div>

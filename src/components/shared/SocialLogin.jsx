@@ -37,14 +37,18 @@ const SocialLogin = () => {
                 });  
     }
     return (
-        <div onClick={handleGoogleSignIn}
-        className='flex justify-center flex-col px-8'>
+        <div 
+        onClick={handleGoogleSignIn}
+        className='flex justify-center flex-col px-4'>
             <div className="divider">OR</div>
-            <button className='flex justify-center
-             gap-4 items-center btn btn-outline text-green-500'>
+            <div className=''>
+              <button className='flex justify-center
+             gap-4 items-center btn btn-outline text-green-500 text-[8px] sm:text-xs 
+             md:text-base w-full'>
                 <FaGoogle/> Continue with Google account
               
             </button>
+            </div>
         </div>
     );
 };

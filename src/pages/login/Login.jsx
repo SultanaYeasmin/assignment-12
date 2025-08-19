@@ -1,5 +1,5 @@
 import SocialLogin from "../../components/Shared/SocialLogin"
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './Login.css';
 import useAuth from "../../hooks/useAuth";
 import toast from "react-hot-toast";
@@ -12,7 +12,9 @@ const Login = () => {
     signOutUser, loading, user, setUser, setLoading,
   } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const from = location?.state?.from?.pathname || "/"
 
   const handleLogin = (event) => {
     event.preventDefault()
@@ -20,19 +22,19 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log({ email, password })
-   signIn(email, password)
+    //console.log({ email, password })
+    signIn(email, password)
       .then((userCredential) => {
         // Signed up 
         const user = userCredential.user;
         // ...
-        navigate('/');
+        navigate(from, { replace: true })
         toast.success("login successfully done!");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(error)
+        //console.log(error)
         toast.error(errorMessage)
       });
   }
@@ -62,12 +64,12 @@ const Login = () => {
               </label>
             </div>
             <div className="form-control mt-6">
-              <button className="btn btn-primary ">Login</button>
+              <button className="btn btn-primary hover:text-white ">Login</button>
             </div>
             <SocialLogin />
             <p className='text-gray-400 px-8'>
-              
-              Don't have an account yet? <Link to='/sign-up'><span className='text-gray-600'>Sign up</span></Link>
+
+              Don't have an account yet? <Link to='/sign-up'><span className='text-gray-600 hover:text-primary hover:underline'>Sign up</span></Link>
             </p>
           </form>
         </div>

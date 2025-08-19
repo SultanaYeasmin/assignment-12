@@ -4,8 +4,11 @@ import FeaturesCard from "./FeaturesCard";
 export default function Features() {
     return (
         <>
-            <h1 className="text-4xl text-center mb-8 mt-16">Why choose Transito?</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 mb-10">
+            <h1 className="text-xl md:text-4xl text-center mb-4 md:mb-8 mt-8 md:mt-16 text-primary bg-base-100">
+                Why choose Transito?
+            </h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center md:justify-between gap-5 md:gap-10 mb-10 bg-base-100 px-5 md:px-2">
 
                 <FeaturesCard
                     icon={FaShieldAlt}

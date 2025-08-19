@@ -18,21 +18,21 @@ const AllParcels = () => {
             queryKey: ['parcels'],
             queryFn: async () => {
                 const res = await axiosSecure.get('/all-parcels');
-                console.log(res)
+                //console.log(res)
                 return res.data.data;
             }
         }
         )
-    console.log(parcels)
+    //console.log(parcels)
     if (isLoading) return <LoadingSpinner />
 
     return (
-        <div>
+        <div className='bg-base-100'>
             <Helmet>
                 <title> All Parcels | Dashboard</title>
             </Helmet>
 
-            <div className='text-center my-10 text-blue-600'>
+            <div className='text-center mt-10 text-primary text-xl italic underline'>
                 All Parcels
             </div>
 

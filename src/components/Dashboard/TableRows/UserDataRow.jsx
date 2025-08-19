@@ -8,12 +8,12 @@ import { useQuery } from "@tanstack/react-query";
 
 const UserDataRow = ({ refetch, index, person, }) => {
     const axiosSecure = useAxiosSecure();
-    // console.log(person)
+    // //console.log(person)
 
     const { name, email, password, image, photoUrl, role, phone, _id } = person || {};
 
     const handleUserRole = (role) => {
-        console.log(role)
+        //console.log(role)
         axiosSecure.patch(`/user/${_id}`, { role: role })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
@@ -34,7 +34,7 @@ const UserDataRow = ({ refetch, index, person, }) => {
         queryKey: ['noOfParcelsBooked', email],
         queryFn: async () => {
             const { data } = await  axiosSecure.get(`/bookings/${email}`)
-            console.log(data.count)
+            //console.log(data.count)
             return data.count;
         }
     })

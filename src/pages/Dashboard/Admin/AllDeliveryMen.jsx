@@ -10,7 +10,7 @@ const AllDeliveryMen = () => {
     const { user, loading } = useAuth();
 
     const { deliveryMen, isLoading, error } = useAllDeliveryMen();
-    console.log(deliveryMen);
+    //console.log(deliveryMen);
     
     if (isLoading) return <LoadingSpinner />
     return (
@@ -19,7 +19,7 @@ const AllDeliveryMen = () => {
                 <title> All Delivery Men | Dashboard</title>
             </Helmet>
 
-            <div className='text-center my-10 text-blue-600'>
+            <div className='text-center my-10 text-primary text-xl italic underline'>
                 All Delivery Men
             </div>
             <div className="overflow-x-auto p-5">

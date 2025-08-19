@@ -1,4 +1,3 @@
-
 import ManageParcelsModal from '../../Modal/ManageParcelModal';
 
 const ParcelDataRow = ({ parcel, index, refetch
